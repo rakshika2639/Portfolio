@@ -1532,9 +1532,8 @@
             }
         });
 
-        // Reset visit counter to 0 for live deployment
-        localStorage.setItem('portfolioVisits', '0');
-        document.getElementById('visit-count').textContent = '0';
+        // Update visit counter on page load
+        updateVisitCounter();
 
         // Terminal functionality
         const terminalOutput = document.getElementById('terminal-output');
