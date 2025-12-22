@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakshika - Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{--bg0:#0a0e17;--bg1:#0d1117;--panel:rgba(22,27,34,.78);--border:#24313a;--text:#c9d1d9;--muted:#9fb3c8;--brand:#58a6ff;--accent:#00ffa7}
+    *{box-sizing:border-box}
+    body{margin:0;display:flex;min-height:100vh;color:var(--text);background:radial-gradient(circle at 20% 30%, rgba(88,166,255,.08) 0%, transparent 50%),radial-gradient(circle at 80% 70%, rgba(10,247,10,.06) 0%, transparent 50%),radial-gradient(circle at 50% 10%, rgba(255,0,255,.04) 0%, transparent 50%),linear-gradient(135deg,var(--bg0) 0%, var(--bg1) 100%);overflow-y:scroll;overflow-x:hidden}
+
+    /* Sidebar */
+    .sidebar{width:280px;background:linear-gradient(135deg,#0d1117 0%,#161b22 50%,#0d1117 100%);color:#fff;display:flex;flex-direction:column;height:100vh;position:fixed;left:0;top:0;border-right:3px solid #30363d;transform:perspective(1200px) rotateY(-3deg);transform-origin:right center;box-shadow:8px 0 25px rgba(0,0,0,.6),inset -8px 0 25px rgba(0,0,0,.4),0 0 60px rgba(88,166,255,.15),inset 0 0 0 1px rgba(88,166,255,.1);backdrop-filter:blur(10px)}
+    .logo{padding:30px 25px;text-align:center;border-bottom:2px solid #30363d;background:linear-gradient(135deg,rgba(13,17,23,.95),rgba(22,27,34,.95))}
+    .logo h1{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,var(--brand),#1f6feb);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-menu{flex:1;padding:30px 0;overflow-y:auto}
+    .nav-menu ul{list-style:none;margin:0;padding:0}
+    .nav-menu a{display:flex;align-items:center;gap:12px;margin:6px 12px;padding:14px 22px;border-radius:10px;text-decoration:none;color:#c9d1d9;background:linear-gradient(135deg,rgba(33,37,43,.75),rgba(22,27,34,.75));border-left:4px solid transparent;transition:.25s}
+    .nav-menu i{width:22px;text-align:center}
+    .nav-menu a:hover{color:var(--brand);border-left-color:var(--brand);transform:translateY(-2px)}
+    .nav-menu .active a{color:var(--brand);border-left-color:var(--brand);background:linear-gradient(135deg,rgba(31,111,235,.25),rgba(88,166,255,.35))}
+    .footer{padding:18px;border-top:2px solid #30363d;text-align:center;color:#8b949e}
+
+    /* Main */
+    .main{flex:1;margin-left:280px;min-height:100vh;position:relative;overflow:auto;padding:36px}
+
+    /* Coming soon stage */
+    .stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100vh - 72px)}
+    .glitch{position:relative;font-family:'Courier New',monospace;font-weight:900;font-size: clamp(2.6rem, 9vw, 8rem);color:#00ffa7;letter-spacing:2px;line-height:1;text-transform:uppercase;text-align:center}
+    .glitch:before,.glitch:after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%}
+    .glitch:before{left:2px;text-shadow:-2px 0 #ff00ff;clip-path:inset(10% 0 15% 0);animation:gl1 2.5s infinite linear alternate-reverse}
+    .glitch:after{left:-2px;text-shadow:2px 0 #00ffff;clip-path:inset(80% 0 5% 0);animation:gl2 2.2s infinite linear alternate-reverse}
+    @keyframes gl1{0%{clip-path:inset(5% 0 80% 0)}50%{clip-path:inset(65% 0 10% 0)}100%{clip-path:inset(20% 0 60% 0)}}
+    @keyframes gl2{0%{clip-path:inset(70% 0 15% 0)}50%{clip-path:inset(15% 0 60% 0)}100%{clip-path:inset(40% 0 30% 0)}}
+
+    .scan{position:absolute;left:0;right:0;height:2px;top:15%;background:linear-gradient(90deg,transparent,rgba(0,255,167,.5),transparent);box-shadow:0 0 10px rgba(0,255,167,.6);animation:scan 4s linear infinite}
+    @keyframes scan{0%{top:10%}50%{top:90%}100%{top:10%}}
+
+    .sub{margin-top:18px;color:#9fb3c8;font-size:1.05rem;text-align:center}
+
+    /* Particles */
+    .particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .p{position:absolute;width:2px;height:2px;background:#00ffa7;border-radius:50%;box-shadow:0 0 6px #00ffa7;opacity:.8;animation:float 10s linear infinite}
+    .p:nth-child(3n){background:#58a6ff;box-shadow:0 0 6px #58a6ff}
+    .p:nth-child(5n){background:#ff6b6b;box-shadow:0 0 6px #ff6b6b}
+    @keyframes float{0%{transform:translateY(100vh) scale(1)}100%{transform:translateY(-10vh) scale(1)}}
+
+    @media(max-width:992px){.sidebar{width:90px}.main{margin-left:90px}.nav-menu a span{display:none}}
+    @media(max-width:576px){.sidebar{width:70px}.main{margin-left:70px;padding:24px}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><h1>{Portfolio}</h1></div>
+    <nav class="nav-menu"><ul>
+      <li><a href="index.html"><i class="fas fa-home"></i><span>HOME</span></a></li>
+      <li><a href="about.html"><i class="fas fa-user"></i><span>ABOUT</span></a></li>
+      <li><a href="why-me.html"><i class="fas fa-lightbulb"></i><span>WHY ME</span></a></li>
+      <li><a href="education.html"><i class="fas fa-graduation-cap"></i><span>EDUCATION</span></a></li>
+      <li><a href="certifications.html"><i class="fas fa-award"></i><span>CERTIFICATIONS</span></a></li>
+      <li><a href="experiences.html"><i class="fas fa-briefcase"></i><span>EXPERIENCES</span></a></li>
+      <li class="active"><a href="projects.html"><i class="fas fa-code"></i><span>PROJECTS</span></a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i><span>CONTACT</span></a></li>
+    </ul></nav>
+    <div class="footer">2025 <a href="https://github.com/rakshika2639" style="color:#58a6ff;text-decoration:none">Rakshika</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="stage" aria-live="polite" aria-label="Coming soon">
+      <div class="particles" id="particles"></div>
+      <div class="scan"></div>
+      <div class="glitch" id="glitch" data-text="Coming Soon">Coming Soon</div>
+      <div class="sub">Crafting interactive showcases. Stay tuned.</div>
+    </div>
+  </main>
+
+  <script>
+    // Particles
+    const host=document.getElementById('particles');
+    function addParticle(){
+      const d=document.createElement('div'); d.className='p';
+      d.style.left=Math.random()*100+'%';
+      d.style.animationDuration=(8+Math.random()*6)+'s';
+      d.style.animationDelay=(Math.random()*5)+'s';
+      host.appendChild(d);
+      setTimeout(()=>{ if(d.parentNode) d.parentNode.removeChild(d); }, 15000);
+    }
+    for(let i=0;i<60;i++){ setTimeout(addParticle, i*120); }
+    setInterval(()=>{ if(host.children.length<90) addParticle(); }, 300);
+
+    // Random glitch kick
+    const glitch=document.getElementById('glitch');
+    setInterval(()=>{
+      glitch.style.filter='hue-rotate('+(Math.random()*40-20)+'deg)';
+      glitch.style.transform='translateY('+(Math.random()*2-1)+'px)';
+      setTimeout(()=>{glitch.style.filter='';glitch.style.transform='';}, 200);
+    }, 1800);
+  </script>
+</body>
+</html>

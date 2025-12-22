@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+:  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakshika - About</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --bg0:#0a0e17; --bg1:#0d1117; --panel:rgba(22,27,34,.78); --panel-2:rgba(22,27,34,.9);
+      --border:#24313a; --text:#c9d1d9; --muted:#9fb3c8; --brand:#58a6ff; --accent:#00ffa7; --accent2:#1f6feb;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;display:flex;min-height:100vh;color:var(--text);
+      background:radial-gradient(circle at 20% 30%, rgba(88,166,255,.08) 0%, transparent 50%),
+                 radial-gradient(circle at 80% 70%, rgba(10,247,10,.06) 0%, transparent 50%),
+                 radial-gradient(circle at 50% 10%, rgba(255,0,255,.04) 0%, transparent 50%),
+                 linear-gradient(135deg,var(--bg0) 0%, var(--bg1) 100%);
+      overflow:hidden}
+
+    /* Sidebar */
+    .sidebar{width:280px;background:linear-gradient(135deg,#0d1117 0%,#161b22 50%,#0d1117 100%);color:#fff;display:flex;flex-direction:column;height:100vh;position:fixed;left:0;top:0;border-right:3px solid #30363d;transform:perspective(1200px) rotateY(-3deg);transform-origin:right center;box-shadow:8px 0 25px rgba(0,0,0,.6),inset -8px 0 25px rgba(0,0,0,.4),0 0 60px rgba(88,166,255,.15),inset 0 0 0 1px rgba(88,166,255,.1);backdrop-filter:blur(10px)}
+    .logo{padding:30px 25px;text-align:center;border-bottom:2px solid #30363d;background:linear-gradient(135deg,rgba(13,17,23,.95),rgba(22,27,34,.95));position:relative}
+    .logo h1{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,var(--brand),#1f6feb);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-menu{flex:1;padding:30px 0;overflow-y:auto}
+    .nav-menu ul{list-style:none;margin:0;padding:0}
+    .nav-menu a{display:flex;align-items:center;gap:12px;margin:6px 12px;padding:14px 22px;border-radius:10px;text-decoration:none;color:#c9d1d9;background:linear-gradient(135deg,rgba(33,37,43,.75),rgba(22,27,34,.75));border-left:4px solid transparent;transition:.25s;box-shadow:inset 0 1px 0 rgba(255,255,255,.08), inset 0 -1px 0 rgba(0,0,0,.2)}
+    .nav-menu i{width:22px;text-align:center}
+    .nav-menu a:hover{color:var(--brand);border-left-color:var(--brand);transform:translateY(-2px)}
+    .nav-menu .active a{color:var(--brand);border-left-color:var(--brand);background:linear-gradient(135deg,rgba(31,111,235,.25),rgba(88,166,255,.35))}
+    .footer{padding:18px;border-top:2px solid #30363d;text-align:center;color:#8b949e}
+
+    /* Main */
+    .main{flex:1;margin-left:280px;min-height:100vh;position:relative;overflow:auto;padding:36px}
+    .hero{display:grid;grid-template-columns: 360px 1fr; gap:22px}
+
+    /* ID card */
+    .idcard{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 10px 25px rgba(0,0,0,.35);overflow:hidden}
+    .idcard:before{content:'';position:absolute;inset:0;background-image:linear-gradient(45deg, rgba(88,166,255,.08) 25%, transparent 25%, transparent 50%, rgba(88,166,255,.08) 50%, rgba(88,166,255,.08) 75%, transparent 75%, transparent);background-size:36px 36px;pointer-events:none}
+    .photo{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+    .photo img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+    .scan{position:absolute;left:0;right:0;height:2px;top:10%;background:linear-gradient(90deg,transparent,rgba(0,255,167,.5),transparent);box-shadow:0 0 10px rgba(0,255,167,.6);animation:scan 4s linear infinite}
+    @keyframes scan{0%{top:8%}50%{top:92%}100%{top:8%}}
+
+    .badge{margin-top:14px;background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:12px}
+    .name{font-family:'Courier New',monospace;font-weight:900;color:var(--accent);font-size:1.4rem;text-shadow:0 0 10px rgba(0,255,167,.4)}
+    .role{color:var(--brand);font-weight:700;margin-top:6px}
+
+    .contacts{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+    .contacts a{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:8px 12px;color:var(--text);text-decoration:none;transition:.2s;line-height:1}
+    .contacts a i{display:inline-block;min-width:16px;text-align:center;font-size:1rem}
+    .contacts a span{display:inline-block;vertical-align:middle}
+    .contacts a:hover{color:var(--brand);border-color:var(--brand);box-shadow:0 0 0 3px rgba(88,166,255,.1)}
+
+    /* Dossier */
+    .dossier{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 10px 25px rgba(0,0,0,.35)}
+    .title{font-family:'Courier New',monospace;font-size:2.2rem;font-weight:900;color:var(--accent);text-shadow:0 0 12px rgba(0,255,167,.45);margin:0 0 10px;letter-spacing:.5px}
+    .summary{color:#b8c2cc;line-height:1.7}
+
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .chip{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:linear-gradient(135deg, rgba(33,37,43,.75), rgba(22,27,34,.75));color:#bfe6ff;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+
+    .sections{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+    .panel h3{color:var(--brand);margin:0 0 8px}
+    .panel ul{margin:0 0 0 18px}
+    .panel li{margin:6px 0}
+
+    /* Animated greeting */
+    .hello{font-family:'Courier New',monospace;color:#00ffa7;font-weight:900;font-size:1.4rem;margin-bottom:8px}
+    .caret{display:inline-block;width:10px;height:16px;background:#00ffa7;margin-left:6px;animation:blink 1s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+    /* Hire Me Button */
+    .hire-me-btn{margin-top:32px;display:inline-block;padding:16px 28px;background:linear-gradient(135deg,var(--accent) 0%, var(--brand) 100%);color:var(--bg0);text-decoration:none;border-radius:12px;font-weight:800;font-size:1.1rem;letter-spacing:0.5px;cursor:pointer;border:none;transition:.3s ease;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,255,167,.3), 0 0 20px rgba(0,255,167,.2);display:inline-flex;align-items:center;gap:10px}
+    .hire-me-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);opacity:0;transition:.3s ease}
+    .hire-me-btn:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,255,167,.4), 0 0 30px rgba(0,255,167,.3)}
+    .hire-me-btn:hover::before{opacity:1}
+    .hire-me-btn i{font-size:1.3rem}
+
+    @media(max-width:1100px){.hero{grid-template-columns:1fr}}
+    @media(max-width:992px){.sidebar{width:90px}.main{margin-left:90px}.nav-menu a span{display:none}}
+    @media(max-width:576px){.sidebar{width:70px}.main{margin-left:70px;padding:24px}.title{font-size:1.8rem}}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>if(window['pdfjsLib']){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}</script>
+<style>
+  /* Scrollbar & overflow overrides */
+  html, body { height: 100%; }
+  body { overflow-y: auto !important; overflow-x: hidden; }
+  .main { overflow-y: auto; }
+</style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="logo"><h1>{Portfolio}</h1></div>
+    <div class="nav-menu">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> <span>HOME</span></a></li>
+        <li class="active"><a href="about.html"><i class="fas fa-user"></i> <span>ABOUT</span></a></li>
+        <li><a href="why-me.html"><i class="fas fa-lightbulb"></i> <span>WHY ME</span></a></li>
+        <li><a href="education.html"><i class="fas fa-graduation-cap"></i> <span>EDUCATION</span></a></li>
+        <li><a href="certifications.html"><i class="fas fa-award"></i> <span>CERTIFICATIONS</span></a></li>
+        <li><a href="experiences.html"><i class="fas fa-briefcase"></i> <span>EXPERIENCES</span></a></li>
+        <li><a href="projects.html"><i class="fas fa-code"></i> <span>PROJECTS</span></a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> <span>CONTACT</span></a></li>
+      </ul>
+    </div>
+    <div class="footer">2025 <a href="https://github.com/rakshika2639" style="color:#58a6ff;text-decoration:none">Rakshika</a></div>
+  </nav>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="hello">Hello World<span class="caret"></span></div>
+    <div class="hero">
+      <div class="idcard">
+        <div class="photo">
+          <img src="girl.webp" alt="Profile photo of Rakshika" />
+          <div class="scan"></div>
+        </div>
+        <div class="badge">
+          <div class="name">Rakshika Singh</div>
+          <div class="role" id="roleText">Web Development & Cybersecurity</div>
+          <div class="contacts">
+            <a href="mailto:rakshika263901@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i><span>rakshika263901@gmail.com</span></a>
+            <a href="https://github.com/rakshika2639" target="_blank" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i><span>github</span></a>
+            <a href="https://www.linkedin.com/in/rakshika-singh-7b5890314/" target="_blank" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin"></i><span>linkedin</span></a>
+            <a href="https://tryhackme.com/p/mico01" target="_blank" title="TryHackMe" aria-label="TryHackMe"><i class="fa-solid fa-user-secret"></i><span>tryhackme</span></a>
+            <a href="https://leetcode.com/u/rakshika2639/" target="_blank" title="LeetCode" aria-label="LeetCode"><i class="fa-solid fa-code"></i><span>leetcode</span></a>
+            <a href="https://www.codechef.com/users/rakshika01" target="_blank" title="CodeChef" aria-label="CodeChef"><i class="fa-solid fa-utensils"></i><span>codechef</span></a>
+            <a href="https://www.hackerrank.com/profile/mittu263901" target="_blank" title="HackerRank" aria-label="HackerRank"><i class="fa-solid fa-laptop-code"></i><span>hackerrank</span></a>
+            <a href="https://www.interviewbit.com/profile/1xm-qgr5a5/" target="_blank" title="InterviewBit" aria-label="InterviewBit"><i class="fa-solid fa-briefcase"></i><span>interviewbit</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dossier">
+        <h2 class="title"># About Me</h2>
+        <p id="summaryText" class="summary">Scanning cv.pdf for profile summary...</p>
+        <div class="chips" id="skillsChips"></div>
+
+        <div class="sections">
+          <div class="panel">
+            <h3>Core Areas</h3>
+            <ul id="areasList">
+              <li>Secure Web Development</li>
+              <li>UI engineering & micro-interactions</li>
+              <li>Open-source collaboration</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Currently Exploring</h3>
+            <ul>
+              <li>Advanced JavaScript patterns</li>
+              <li>Frontend performance & accessibility</li>
+              <li>Security best practices for the web</li>
+            </ul>
+          </div>
+        </div>
+        <a href="contact.html" class="hire-me-btn"><i class="fas fa-handshake"></i> Hire Me</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    async function getPdfText(url){
+      if(!window.pdfjsLib) throw new Error('PDF.js failed to load');
+      const pdf=await pdfjsLib.getDocument(url).promise; let s='';
+      for(let p=1;p<=pdf.numPages;p++){ const page=await pdf.getPage(p); const tc=await page.getTextContent(); s+=tc.items.map(i=>i.str).join('\n')+'\n'; }
+      return s;
+    }
+
+    function parseSummaryAndSkills(text){
+      const lines=text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+      const U=s=>s.toUpperCase();
+      const sumHeads=['SUMMARY','ABOUT','ABOUT ME','PROFILE','OBJECTIVE'];
+      const stopHeads=['EXPERIENCE','EXPERIENCES','WORK EXPERIENCE','EDUCATION','PROJECTS','CERTIFICATIONS','ACHIEVEMENTS','AWARDS','SKILLS','TECHNICAL SKILLS','LANGUAGES','CONTACT'];
+
+      // collect summary
+      let summary='';
+      for(let i=0;i<lines.length;i++){
+        const u=U(lines[i]).replace(/:$/,'');
+        if(sumHeads.includes(u)){
+          let j=i+1; const buf=[]; while(j<lines.length){ const v=U(lines[j]).replace(/:$/,''); if(stopHeads.includes(v)) break; buf.push(lines[j]); j++; }
+          summary=buf.join(' ');
+          break;
+        }
+      }
+
+      // collect skills
+      const skillHeads=['SKILLS','TECHNICAL SKILLS','CORE SKILLS','KEY SKILLS','SKILLS & TOOLS','TECH STACK'];
+      let skills=[];
+      for(let i=0;i<lines.length;i++){
+        const u=U(lines[i]).replace(/:$/,'');
+        if(skillHeads.includes(u)){
+          const buf=[]; let j=i+1; while(j<lines.length){ const v=U(lines[j]).replace(/:$/,''); if(skillHeads.includes(v) || stopHeads.includes(v)) break; buf.push(lines[j]); j++; }
+          const blob=buf.join(' ');
+          skills=[...new Set(blob.split(/[\u2022•\-\–\—*,;|\n]+/g).map(s=>s.trim()).filter(s=>s && s.length>1 && !/^\d+$/.test(s)))];
+          break;
+        }
+      }
+      return {summary, skills};
+    }
+
+    function fillSummary(summary){
+      const el=document.getElementById('summaryText');
+      const cyberLine = ' I am a cyber enthusiast with a passion for secure, resilient systems.';
+      let text='';
+      if(summary && summary.length>40){
+        text = summary;
+        if(!/cyber|security/i.test(text)) text += cyberLine;
+      } else {
+        text = "I'm a developer who enjoys building secure, user-friendly web experiences and learning by doing. I love crafting smooth interactions and solving problems with clean, reliable code." + cyberLine;
+      }
+      el.textContent = text;
+    }
+
+    function fillSkills(skills){
+      const host=document.getElementById('skillsChips'); host.innerHTML='';
+      const top=(skills||[]).slice(0,14);
+      if(!top.length){
+        ['HTML','CSS','JavaScript','React','Node.js','UI/UX'].forEach(s=>{ const c=document.createElement('span'); c.className='chip'; c.textContent=s; host.appendChild(c);});
+        return;
+      }
+      top.forEach(s=>{ const c=document.createElement('span'); c.className='chip'; c.textContent=s; host.appendChild(c); });
+    }
+
+    (async function bootstrap(){
+      try{
+        const text=await getPdfText('cv.pdf?ts='+Date.now());
+        const {summary, skills}=parseSummaryAndSkills(text);
+        fillSummary(summary);
+        fillSkills(skills);
+        // infer role from summary keywords
+        const role=document.getElementById('roleText');
+        if(summary){
+          if(/security|cyber/i.test(summary)) role.textContent='Web Development & Cybersecurity';
+          else if(/frontend|react|ui/i.test(summary)) role.textContent='Frontend Engineer';
+          else role.textContent='Web Developer';
+        }
+      }catch(e){
+        console.error(e);
+        fillSummary('');
+        fillSkills([]);
+      }
+    })();
+
+    // LinkedIn: Direct client-side fetching is blocked by CORS. If you want enriched About data from LinkedIn, expose it via a backend or paste structured data to merge here.
+  </script>
+</body>
+</html>

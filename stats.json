@@ -1,0 +1,11 @@
+{
+  "tryhackme": { "rankPercent": 1, "points": 60000, "roomsCompleted": 350 },
+  "leetcode": { "easy": 120, "medium": 90, "hard": 20 },
+  "codechef": { "rating": 1600, "stars": 3 },
+  "codeforces": { "rating": 1200, "maxRating": 1250 },
+  "hackerrank": { "badges": 6, "problems": 150 },
+  "interviewbit": { "score": 300, "level": 5 },
+  "letsdefend": { "modules": 40, "incidents": 10 },
+  "github": { "repos": 20, "contributions": 220 },
+  "linkedin": { "connections": 500 }
+}

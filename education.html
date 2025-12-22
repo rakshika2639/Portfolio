@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakshika - Education</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-0: #0a0e17;
+      --bg-1: #0d1117;
+      --panel: rgba(22,27,34,0.75);
+      --border: #25313a;
+      --text: #c9d1d9;
+      --muted: #9fb3c8;
+      --brand: #58a6ff;
+      --accent: #00ffa7;
+      --accent-2: #1f6feb;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; display: flex; min-height: 100vh; color: var(--text);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(88,166,255,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(10,247,10,.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 10%, rgba(255,0,255,.04) 0%, transparent 50%),
+        linear-gradient(135deg, var(--bg-0) 0%, var(--bg-1) 100%);
+      overflow-y: scroll; overflow-x: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px; background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+      color: #fff; display: flex; flex-direction: column; height: 100vh; position: fixed; left: 0; top: 0;
+      border-right: 3px solid #30363d; transform: perspective(1200px) rotateY(-3deg); transform-origin: right center;
+      box-shadow: 8px 0 25px rgba(0,0,0,.6), inset -8px 0 25px rgba(0,0,0,.4), 0 0 60px rgba(88,166,255,.15), inset 0 0 0 1px rgba(88,166,255,.1);
+      backdrop-filter: blur(10px); z-index: 1000;
+    }
+    .logo { padding: 30px 25px; text-align: center; border-bottom: 2px solid #30363d;
+      background: linear-gradient(135deg, rgba(13,17,23,.95) 0%, rgba(22,27,34,.95) 100%);
+      position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,.1), inset 0 -2px 4px rgba(0,0,0,.4), 0 0 20px rgba(88,166,255,.1);
+    }
+    .logo h1 { margin: 0; font-weight: 800; font-size: 1.5rem; letter-spacing: 1.5px;
+      background: linear-gradient(90deg, var(--brand), #1f6feb); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-menu { flex: 1; padding: 30px 0; overflow-y: auto; }
+    .nav-menu ul { margin: 0; padding: 0; list-style: none; }
+    .nav-menu a { display: flex; align-items: center; gap: 12px; padding: 14px 22px; margin: 6px 12px;
+      text-decoration: none; color: #c9d1d9; border-radius: 10px; background: linear-gradient(135deg, rgba(33,37,43,.75), rgba(22,27,34,.75));
+      border-left: 4px solid transparent; transition: .25s ease; box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -1px 0 rgba(0,0,0,.2);
+    }
+    .nav-menu a:hover { color: var(--brand); border-left-color: var(--brand); transform: translateY(-2px); }
+    .nav-menu .active a { color: var(--brand); border-left-color: var(--brand); background: linear-gradient(135deg, rgba(31,111,235,.25), rgba(88,166,255,.35)); }
+    .nav-menu i { width: 22px; text-align: center; }
+    .footer { padding: 18px; border-top: 2px solid #30363d; text-align: center; color: #8b949e; }
+
+    /* Main */
+    .main { flex: 1; margin-left: 280px; padding: 38px; min-height: 100vh; position: relative; overflow: auto; }
+
+    .title { font-family: 'Courier New', monospace; font-size: 3rem; font-weight: 900; color: var(--accent);
+      text-shadow: 0 0 12px rgba(0,255,167,.45); letter-spacing: 1px; margin: 0 0 10px; }
+    .subtitle { color: var(--muted); margin-bottom: 28px; }
+
+    /* Controls */
+    .controls { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; color: var(--text); border: 1px solid var(--border);
+      background: var(--panel); border-radius: 10px; cursor: pointer; transition: .2s ease; }
+    .btn:hover { border-color: var(--brand); color: var(--brand); box-shadow: 0 0 0 3px rgba(88,166,255,.1); }
+    .btn .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
+
+    /* Grid cards */
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(320px, 1fr)); gap: 22px; }
+    .card { position: relative; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow);
+      overflow: hidden; }
+    .card:before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--accent), transparent); box-shadow: 0 0 10px rgba(0,255,167,.5); }
+    .card h3 { margin: 4px 0 6px; font-size: 1.25rem; color: var(--accent); text-shadow: 0 0 6px rgba(0,255,167,.35); }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; color: var(--brand); font-weight: 600; margin-bottom: 8px; }
+    .inst { color: var(--muted); font-weight: 600; margin-bottom: 10px; }
+    .desc { color: #b8c2cc; line-height: 1.65; }
+
+    /* Coursework Section */
+    .coursework-section { margin-top: 40px; padding: 24px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .coursework-section h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .skill-tag { background: linear-gradient(135deg, rgba(0,255,167,.15), rgba(0,255,167,.08)); border: 1px solid rgba(0,255,167,.3); color: var(--accent); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; transition: .2s ease; display: inline-flex; align-items: center; gap: 6px; }
+    .skill-tag:hover { background: linear-gradient(135deg, rgba(0,255,167,.25), rgba(0,255,167,.15)); border-color: var(--accent); box-shadow: 0 0 12px rgba(0,255,167,.2); transform: translateY(-2px); }
+    .skill-tag i { opacity: 0.7; }
+
+    /* Progress Indicator */
+    .progress-box { background: linear-gradient(135deg, rgba(88,166,255,.1), rgba(0,255,167,.05)); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 24px; }
+    .progress-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .progress-label .label-text { color: var(--accent); font-weight: 600; }
+    .progress-label .label-percent { color: var(--brand); font-size: 0.9rem; }
+    .progress-bar { width: 100%; height: 8px; background: rgba(88,166,255,.1); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--brand)); border-radius: 4px; animation: progAnim 2s ease; }
+    @keyframes progAnim { from { width: 0; } to { width: var(--progress-width); } }
+
+    /* Enhanced Card */
+    .card-enhanced { position: relative; background: linear-gradient(135deg, var(--panel) 0%, rgba(31,111,235,.1) 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); overflow: hidden; transition: .3s ease; }
+    .card-enhanced:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,.45), 0 0 20px rgba(88,166,255,.2); border-color: var(--brand); }
+    .card-enhanced::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--accent), var(--brand)); box-shadow: 0 0 15px rgba(0,255,167,.5); }
+    .card-header { display: flex; justify-content: space-between; align-items: start; gap: 15px; margin-bottom: 16px; }
+    .card-title-group h3 { margin: 0 0 4px; color: var(--accent); font-size: 1.3rem; }
+    .card-badge { background: linear-gradient(135deg, var(--accent), rgba(0,255,167,.7)); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; color: var(--bg-0); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .card-meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+    .meta-item { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.9rem; }
+    .meta-item i { color: var(--brand); }
+
+    /* Timeline (alt view) */
+    .timeline { position: relative; margin-top: 30px; }
+    .timeline::before { content: ''; position: absolute; left: 24px; top: 0; width: 2px; height: 100%; background: linear-gradient(180deg, rgba(0,255,167,.1), rgba(0,255,167,.6), rgba(0,255,167,.1)); }
+    .t-item { position: relative; margin-left: 60px; margin-bottom: 26px; }
+    .t-item::before { content: ''; position: absolute; left: -38px; top: 10px; width: 12px; height: 12px; border: 3px solid var(--accent); border-radius: 50%; background: var(--bg-1); box-shadow: 0 0 10px var(--accent); }
+    .t-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+    .t-card h4 { margin: 0 0 6px; color: var(--accent); }
+
+    /* Skeleton */
+    .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.12), rgba(255,255,255,0.05)); background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: 8px; }
+    .sk-line { height: 14px; margin: 8px 0; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    @media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } .card-meta-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 992px)  { .sidebar { width: 90px; } .main { margin-left: 90px; } .nav-menu a span { display: none; } .card-header { flex-direction: column; align-items: flex-start; } .card-badge { align-self: flex-start; } }
+    @media (max-width: 576px)  { .sidebar { width: 70px; } .main { margin-left: 70px; padding: 24px; } .title { font-size: 2.2rem; } .skill-tags { flex-direction: column; } .skill-tag { width: 100%; justify-content: center; } }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window['pdfjsLib']) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><h1>{Portfolio}</h1></div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i><span>HOME</span></a></li>
+        <li><a href="about.html"><i class="fas fa-user"></i><span>ABOUT</span></a></li>
+        <li><a href="why-me.html"><i class="fas fa-lightbulb"></i><span>WHY ME</span></a></li>
+        <li class="active"><a href="education.html"><i class="fas fa-graduation-cap"></i><span>EDUCATION</span></a></li>
+        <li><a href="certifications.html"><i class="fas fa-award"></i><span>CERTIFICATIONS</span></a></li>
+        <li><a href="experiences.html"><i class="fas fa-briefcase"></i><span>EXPERIENCES</span></a></li>
+        <li><a href="projects.html"><i class="fas fa-code"></i><span>PROJECTS</span></a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i><span>CONTACT</span></a></li>
+      </ul>
+    </nav>
+    <div class="footer">2025 <a href="https://github.com/rakshika2639" style="color:var(--brand);text-decoration:none">Rakshika</a></div>
+  </aside>
+
+  <main class="main">
+    <h1 class="title"># Education</h1>
+    <div class="subtitle">Building expertise in cybersecurity, ethical hacking, and digital forensics.</div>
+
+    <div class="progress-box" id="degreeProgress" style="display:none;">
+      <div class="progress-label">
+        <span class="label-text"><i class="fas fa-graduation-cap"></i> Current Progress</span>
+        <span class="label-percent" id="progressPercent">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="--progress-width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="toggleView"><i class="fa fa-layer-group"></i> Toggle Cards/Timeline</button>
+    </div>
+
+    <section id="cards" class="grid" aria-live="polite" style="grid-template-columns: 1fr; max-width: 900px;">
+      <div class="card-enhanced" id="mainCard">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h3>B.Tech Computer Science Engineering</h3>
+            <div style="color: var(--accent); font-size: 0.9rem; margin-top: 4px;">Cybersecurity & Digital Forensics Specialization</div>
+          </div>
+          <div class="card-badge"><i class="fas fa-hourglass-half"></i> Ongoing</div>
+        </div>
+
+        <div class="card-meta-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="meta-item">
+            <i class="fa-solid fa-building-columns"></i>
+            <div style="line-height: 1.4;">
+              <div style="font-size: 0.8rem; color: var(--muted);">Institution</div>
+              <div style="color: var(--text); font-weight: 600;">VIT Bhopal</div>
+            </div>
+          </div>
+          <div class="meta-item">
+            <i class="fa-regular fa-calendar"></i>
+            <div style="line-height: 1.4;">
+              <div style="font-size: 0.8rem; color: var(--muted);">Duration</div>
+              <div style="color: var(--text); font-weight: 600;">Sept 2024 - July 2028</div>
+            </div>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-graduation-cap"></i>
+            <div style="line-height: 1.4;">
+              <div style="font-size: 0.8rem; color: var(--muted);">Status</div>
+              <div style="color: var(--accent); font-weight: 600;">Year 2</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; margin: 16px 0;">
+          <div style="color: var(--accent); font-size: 0.9rem; font-weight: 600; margin-bottom: 8px;"><i class="fas fa-star"></i> Key Focus Areas</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <div style="background: rgba(0,255,167,.1); border: 1px solid rgba(0,255,167,.3); padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; color: var(--accent);">Digital Forensics</div>
+            <div style="background: rgba(0,255,167,.1); border: 1px solid rgba(0,255,167,.3); padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; color: var(--accent);">Ethical Hacking</div>
+            <div style="background: rgba(0,255,167,.1); border: 1px solid rgba(0,255,167,.3); padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; color: var(--accent);">Cybersecurity</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="color: var(--text); font-weight: 600; margin-bottom: 8px;"><i class="fas fa-info-circle"></i> Overview</div>
+          <div style="color: #b8c2cc; line-height: 1.7; font-size: 0.95rem;">Pursuing a comprehensive B.Tech degree with specialization in Cybersecurity and Digital Forensics. Combining theoretical knowledge with hands-on training in ethical hacking, vulnerability testing, and forensic analysis, alongside core Computer Science fundamentals.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="timeline" style="display:none" aria-live="polite"></section>
+
+    <section id="courseworkSection" class="coursework-section">
+      <h3><i class="fas fa-book"></i> Relevant Coursework</h3>
+      <div class="skill-tags" id="courseworkTags"></div>
+    </section>
+  </main>
+
+  <a href="cv.pdf" download title="Download CV" style="position:fixed;right:20px;bottom:20px;background:linear-gradient(135deg,#58a6ff,#1f6feb);color:#fff;padding:14px;border-radius:50%;box-shadow:0 4px 10px rgba(0,0,0,.3)"><i class="fas fa-download"></i></a>
+
+  <script>
+    async function getPdfText(url){
+      if(!window.pdfjsLib) throw new Error('PDF.js failed to load');
+      const loadingTask=pdfjsLib.getDocument(url); const pdf=await loadingTask.promise; let s='';
+      for(let p=1;p<=pdf.numPages;p++){ const page=await pdf.getPage(p); const tc=await page.getTextContent(); s+=tc.items.map(i=>i.str).join('\n')+'\n'; }
+      return s;
+    }
+
+    function parseEducation(text){
+      const lines=text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+      const U=s=>s.toUpperCase();
+      const eduHeads=['EDUCATION','ACADEMICS','ACADEMIC BACKGROUND','QUALIFICATIONS','EDUCATIONAL QUALIFICATIONS'];
+      const stops=['SUMMARY','OBJECTIVE','PROFILE','EXPERIENCE','WORK EXPERIENCE','PROFESSIONAL EXPERIENCE','EMPLOYMENT','PROJECTS','CERTIFICATIONS','ACHIEVEMENTS','AWARDS','SKILLS','TECHNICAL SKILLS','LANGUAGES','HOBBIES','INTERESTS','PUBLICATIONS'];
+
+      // collect edu section(s)
+      const sections=[]; let i=0;
+      while(i<lines.length){
+        const l=U(lines[i]).replace(/:$/,'');
+        if(eduHeads.includes(l)){ let j=i+1; const part=[]; for(;j<lines.length;j++){ const u=U(lines[j]).replace(/:$/,''); if(eduHeads.includes(u)) continue; if(stops.includes(u)) break; part.push(lines[j]); }
+          sections.push(part); i=j; continue; }
+        i++;
+      }
+      const sec=sections.flat(); if(!sec.length) return [];
+
+      // heuristics
+      const degreeRx=/(Bachelor|Master|B\.?Sc|B\.?E\.?|B\.?Tech|M\.?Sc|M\.?E\.?|M\.?Tech|Diploma|High School|Secondary|Senior Secondary|Intermediate|PG|Post\-Graduate|Undergraduate)/i;
+      const yearRx=/((19|20)\d{2})(\s*(–|-|to)\s*(Present|(19|20)\d{2}))?/i;
+
+      const rows=[]; let cur=null;
+      for(const l of sec){
+        const isStart=degreeRx.test(l)||yearRx.test(l)||/^[-•\u2022]/.test(l);
+        if(isStart){ if(cur) rows.push(cur); cur={title:'',inst:'',period:'',desc:[]};
+          const y=l.match(yearRx); if(y) cur.period=y[0].replace(/\s{2,}/g,' ').replace(/to/i,'–');
+          cur.title=l.replace(yearRx,'').replace(/^[-•\u2022]\s*/, '').trim();
+          const inst=l.match(/\b(University|College|Institute|School|Academy)\b.*$/i); if(inst) cur.inst=inst[0].trim();
+        } else if(cur){
+          if(!cur.inst){ const inst2=l.match(/\b(University|College|Institute|School|Academy)\b.*$/i); if(inst2) cur.inst=inst2[0].trim(); }
+          if(!cur.period){ const y2=l.match(yearRx); if(y2) cur.period=y2[0].replace(/\s{2,}/g,' ').replace(/to/i,'–'); }
+          cur.desc.push(l.replace(/^[-•\u2022]\s*/, ''));
+        }
+      }
+      if(cur) rows.push(cur);
+
+      function parseYears(p){
+        if(!p) return {start:null,end:null};
+        const m=p.match(/(19|20)\d{2}/g); if(!m) return {start:null,end:null};
+        const start=parseInt(m[0]); const end=(m.length>1?parseInt(m[1]):(p.toLowerCase().includes('present')?Infinity:start));
+        return {start,end};
+      }
+
+      return rows.map(r=>{const y=parseYears(r.period); return {title:r.title||'Education', inst:r.inst, period:r.period, desc:r.desc.join(' ').trim(), start:y.start, end:y.end};})
+                 .filter(r=>r.title.length>0 || r.inst)
+    }
+
+    function renderCards(list){
+      const host=document.getElementById('cards'); host.innerHTML='';
+      if(!list.length){ host.innerHTML='<div style="color:var(--muted);text-align:center;padding:30px 0">No education details found in cv.pdf.</div>'; return; }
+      list.forEach(it=>{
+        const card=document.createElement('div'); card.className='card-enhanced';
+        const header=document.createElement('div'); header.className='card-header';
+        const titleGroup=document.createElement('div'); titleGroup.className='card-title-group';
+        const h3=document.createElement('h3'); h3.textContent=it.title; titleGroup.appendChild(h3);
+        header.appendChild(titleGroup);
+        if(it.end===Infinity){ const badge=document.createElement('div'); badge.className='card-badge'; badge.innerHTML='<i class="fas fa-hourglass-half"></i> Ongoing'; header.appendChild(badge); }
+        card.appendChild(header);
+        
+        const metaGrid=document.createElement('div'); metaGrid.className='card-meta-grid';
+        if(it.period){ const periodItem=document.createElement('div'); periodItem.className='meta-item'; periodItem.innerHTML='<i class="fa-regular fa-calendar"></i> '+it.period; metaGrid.appendChild(periodItem); }
+        if(it.inst){ const instItem=document.createElement('div'); instItem.className='meta-item'; instItem.innerHTML='<i class="fa-solid fa-building-columns"></i> '+it.inst; metaGrid.appendChild(instItem); }
+        card.appendChild(metaGrid);
+        
+        if(it.desc){ const p=document.createElement('div'); p.className='desc'; p.textContent=it.desc; card.appendChild(p); }
+        host.appendChild(card);
+      });
+    }
+
+    function renderTimeline(list){
+      const host=document.getElementById('timeline'); host.innerHTML='';
+      if(!list.length){ host.innerHTML='<div style="color:var(--muted);padding:10px 0">No education details found in cv.pdf.</div>'; return; }
+      list.forEach(it=>{
+        const item=document.createElement('div'); item.className='t-item';
+        const card=document.createElement('div'); card.className='t-card';
+        const h4=document.createElement('h4'); h4.textContent=it.title; card.appendChild(h4);
+        if(it.period){ const m=document.createElement('div'); m.className='meta'; m.innerHTML='<i class="fa-regular fa-calendar"></i> '+it.period; card.appendChild(m); }
+        if(it.inst){ const inst=document.createElement('div'); inst.className='inst'; inst.textContent=it.inst; card.appendChild(inst); }
+        if(it.desc){ const p=document.createElement('div'); p.className='desc'; p.textContent=it.desc; card.appendChild(p); }
+        item.appendChild(card); host.appendChild(item);
+      });
+    }
+
+    function sortDesc(list){
+      return [...list].sort((a,b)=>{
+        const ae=(a.end===Infinity?99999:(a.end||-1)); const be=(b.end===Infinity?99999:(b.end||-1));
+        if(be!==ae) return be-ae; const as=(a.start||-1), bs=(b.start||-1); return bs-as;
+      });
+    }
+
+    const courseworkList=[
+      {name:'Principles of Digital Forensics',icon:'fa-magnifying-glass'},
+      {name:'Ethical Hacking',icon:'fa-shield'},
+      {name:'Data Structures and Algorithms',icon:'fa-code'},
+      {name:'Software Vulnerability Testing',icon:'fa-bug'},
+      {name:'Object-Oriented Programming with C++',icon:'fa-cube'},
+      {name:'Database Management Systems',icon:'fa-database'},
+      {name:'Operating Systems',icon:'fa-microchip'},
+      {name:'Computer Networks',icon:'fa-network-wired'},
+      {name:'Internet and Web Programming',icon:'fa-globe'}
+    ];
+
+    function renderCoursework(){
+      const host=document.getElementById('courseworkTags');
+      const section=document.getElementById('courseworkSection');
+      host.innerHTML='';
+      courseworkList.forEach(course=>{
+        const tag=document.createElement('div'); tag.className='skill-tag';
+        tag.innerHTML=`<i class="fas ${course.icon}"></i> ${course.name}`;
+        host.appendChild(tag);
+      });
+      section.style.display='block';
+    }
+
+    function updateProgress(){
+      const progressBox=document.getElementById('degreeProgress');
+      const progressFill=document.getElementById('progressFill');
+      const progressPercent=document.getElementById('progressPercent');
+      const startDate=new Date(2024,8,1); const today=new Date(); const endDate=new Date(2028,7,31);
+      const totalDays=(endDate-startDate); const elapsedDays=(today-startDate);
+      const progress=Math.min((elapsedDays/totalDays)*100,100);
+      progressFill.style.setProperty('--progress-width',progress.toFixed(1)+'%');
+      progressPercent.textContent=progress.toFixed(0)+'%';
+      progressBox.style.display='block';
+    }
+
+    function init(){
+      renderCoursework();
+      updateProgress();
+    }
+
+    document.getElementById('toggleView').addEventListener('click',()=>{
+      const cardsSection=document.getElementById('cards');
+      const timelineSection=document.getElementById('timeline');
+      const courseworkSection=document.getElementById('courseworkSection');
+      const currentDisplay=cardsSection.style.display!=='none';
+      cardsSection.style.display=currentDisplay?'none':'grid';
+      courseworkSection.style.display=currentDisplay?'none':'block';
+      timelineSection.style.display=currentDisplay?'block':'none';
+    });
+
+    // Note: Client-side access to LinkedIn is blocked by CORS; integrate via backend if needed.
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakshika - Why Me</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg0:#0a0e17; --bg1:#0d1117; --panel:rgba(22,27,34,.78); --border:#24313a;
+      --text:#c9d1d9; --muted:#9fb3c8; --brand:#58a6ff; --accent:#00ffa7;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;display:flex;min-height:100vh;color:var(--text);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(88,166,255,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(10,247,10,.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 10%, rgba(255,0,255,.04) 0%, transparent 50%),
+        linear-gradient(135deg,var(--bg0) 0%, var(--bg1) 100%);
+      overflow-y:scroll;overflow-x:hidden}
+
+    /* Sidebar */
+    .sidebar{width:280px;background:linear-gradient(135deg,#0d1117 0%,#161b22 50%,#0d1117 100%);color:#fff;display:flex;flex-direction:column;height:100vh;position:fixed;left:0;top:0;border-right:3px solid #30363d;transform:perspective(1200px) rotateY(-3deg);transform-origin:right center;box-shadow:8px 0 25px rgba(0,0,0,.6),inset -8px 0 25px rgba(0,0,0,.4),0 0 60px rgba(88,166,255,.15),inset 0 0 0 1px rgba(88,166,255,.1);backdrop-filter:blur(10px)}
+    .logo{padding:30px 25px;text-align:center;border-bottom:2px solid #30363d;background:linear-gradient(135deg,rgba(13,17,23,.95),rgba(22,27,34,.95))}
+    .logo h1{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,var(--brand),#1f6feb);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-menu{flex:1;padding:30px 0;overflow-y:auto}
+    .nav-menu ul{list-style:none;margin:0;padding:0}
+    .nav-menu a{display:flex;align-items:center;gap:12px;margin:6px 12px;padding:14px 22px;border-radius:10px;text-decoration:none;color:#c9d1d9;background:linear-gradient(135deg,rgba(33,37,43,.75),rgba(22,27,34,.75));border-left:4px solid transparent;transition:.25s;box-shadow:inset 0 1px 0 rgba(255,255,255,.08), inset 0 -1px 0 rgba(0,0,0,.2)}
+    .nav-menu i{width:22px;text-align:center}
+    .nav-menu a:hover{color:var(--brand);border-left-color:var(--brand);transform:translateY(-2px)}
+    .nav-menu .active a{color:var(--brand);border-left-color:var(--brand);background:linear-gradient(135deg,rgba(31,111,235,.25),rgba(88,166,255,.35))}
+    .footer{padding:18px;border-top:2px solid #30363d;text-align:center;color:#8b949e}
+
+    /* Main */
+    .main{flex:1;margin-left:280px;min-height:100vh;position:relative;overflow:auto;padding:36px}
+
+    /* Hero */
+    .hero{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 24px;box-shadow:0 10px 25px rgba(0,0,0,.35);overflow:hidden}
+    .hero:before{content:'';position:absolute;inset:0;background-image:linear-gradient(45deg, rgba(88,166,255,.08) 25%, transparent 25%, transparent 50%, rgba(88,166,255,.08) 50%, rgba(88,166,255,.08) 75%, transparent 75%, transparent);background-size:36px 36px;pointer-events:none}
+    .title{font-family:'Courier New',monospace;font-weight:900;font-size:2.6rem;color:var(--accent);text-shadow:0 0 12px rgba(0,255,167,.45);margin:0 0 8px}
+    .subtitle{color:var(--muted)}
+    .reasons{display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:16px;margin-top:18px}
+    .reason{background:rgba(22,27,34,.9);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+    .reason h3{margin:0 0 6px;color:var(--brand)}
+    .reason p{margin:0;color:#b8c2cc;line-height:1.7}
+
+    /* Stats */
+    .stats{margin-top:24px;display:grid;grid-template-columns:2fr 3fr;gap:18px}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+    .panel h3{margin:0;color:var(--brand);padding:14px 16px;border-bottom:1px solid var(--border)}
+    .panel .body{padding:14px 16px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(280px,1fr));gap:14px;align-items:stretch}
+    .card{background:rgba(22,27,34,.9);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px}
+    .card i{font-size:1.2rem;color:var(--brand);width:18px;text-align:center}
+    .card a{color:#bfe6ff;text-decoration:none}
+    .card a:hover{color:#79c0ff;text-decoration:underline}
+
+    /* Hire Me Button */
+    .hire-me-btn{margin-top:32px;display:inline-block;padding:16px 28px;background:linear-gradient(135deg,var(--accent) 0%, var(--brand) 100%);color:var(--bg0);text-decoration:none;border-radius:12px;font-weight:800;font-size:1.1rem;letter-spacing:0.5px;cursor:pointer;border:none;transition:.3s ease;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,255,167,.3), 0 0 20px rgba(0,255,167,.2);display:inline-flex;align-items:center;gap:10px}
+    .hire-me-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);opacity:0;transition:.3s ease}
+    .hire-me-btn:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,255,167,.4), 0 0 30px rgba(0,255,167,.3)}
+    .hire-me-btn:hover::before{opacity:1}
+    .hire-me-btn i{font-size:1.3rem}
+
+    /* Responsive */
+    @media(max-width:1100px){.reasons{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,minmax(220px,1fr))}.stats{grid-template-columns:1fr}}
+    @media(max-width:576px){.reasons{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  /* Scrollbar & overflow overrides for full accessibility */
+  html, body { height: 100%; }
+  body { overflow-y: auto !important; overflow-x: hidden; }
+  .main { overflow-y: auto; }
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><h1>{Portfolio}</h1></div>
+    <nav class="nav-menu"><ul>
+      <li><a href="index.html"><i class="fas fa-home"></i><span>HOME</span></a></li>
+      <li><a href="about.html"><i class="fas fa-user"></i><span>ABOUT</span></a></li>
+      <li class="active"><a href="why-me.html"><i class="fas fa-lightbulb"></i><span>WHY ME</span></a></li>
+      <li><a href="education.html"><i class="fas fa-graduation-cap"></i><span>EDUCATION</span></a></li>
+      <li><a href="certifications.html"><i class="fas fa-award"></i><span>CERTIFICATIONS</span></a></li>
+      <li><a href="experiences.html"><i class="fas fa-briefcase"></i><span>EXPERIENCES</span></a></li>
+      <li><a href="projects.html"><i class="fas fa-code"></i><span>PROJECTS</span></a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i><span>CONTACT</span></a></li>
+    </ul></nav>
+    <div class="footer">2025 <a href="https://github.com/rakshika2639" style="color:#58a6ff;text-decoration:none">Rakshika</a></div>
+  </aside>
+
+  <main class="main">
+    <section class="hero">
+      <h1 class="title"># Why Me</h1>
+      <div class="subtitle">Security-first, code-obsessed, and relentlessly curious.</div>
+      <div class="reasons">
+        <div class="reason">
+          <h3><i class="fa-solid fa-shield-halved"></i> Security mindset</h3>
+          <p>Top 1% on TryHackMe. I build with defense in depth and think like an attacker to protect users.</p>
+        </div>
+        <div class="reason">
+          <h3><i class="fa-solid fa-bolt"></i> Execution speed</h3>
+          <p>Rapid prototyping with clean, maintainable code. I ship iteratively and learn fast.</p>
+        </div>
+        <div class="reason">
+          <h3><i class="fa-solid fa-code"></i> Polyglot dev</h3>
+          <p>Python, C++, Java, SQL, HTML/CSS/JS with Docker + Linux—comfortable across the stack.</p>
+        </div>
+        <div class="reason">
+          <h3><i class="fa-solid fa-wand-magic-sparkles"></i> UI craft</h3>
+          <p>Attention to micro‑interactions and performance to deliver delightful UX.</p>
+        </div>
+        <div class="reason">
+          <h3><i class="fa-solid fa-users"></i> Team & comms</h3>
+          <p>Active open‑source contributor. I document, review, and collaborate with empathy.</p>
+        </div>
+        <div class="reason">
+          <h3><i class="fa-solid fa-brain"></i> Problem‑solver</h3>
+          <p>Turning real‑world challenges into secure, elegant solutions—currently building an AI Web Vuln Scanner.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="panel">
+        <h3>Cyber Profiles</h3>
+        <div class="body">
+          <div class="grid" style="grid-template-columns:1fr;justify-items:center">
+            <div class="card" style="flex-direction:column;align-items:center;width:100%;max-width:600px">
+              <div style="display:flex;gap:10px;align-items:center;width:100%;justify-content:center"><i class="fa-solid fa-shield-halved"></i><div><div>TryHackMe</div></div></div>
+              <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3794713" style="border:none;width:100%;min-height:420px;border-radius:10px;background:#0b1020;box-shadow:0 0 0 1px var(--border), 0 8px 24px rgba(0,0,0,.35);margin-top:10px"></iframe>
+            </div>
+                      </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Dev & Coding Profiles</h3>
+        <div class="body">
+          <div class="grid">
+            <div class="card" style="flex-direction:column;align-items:flex-start">
+              <div style="display:flex;gap:10px;align-items:center"><i class="fa-solid fa-code"></i><div><div>LeetCode</div></div></div>
+              <img src="https://leetcard.jacoblin.cool/rakshika2639?theme=forest&font=Noto%20Sans%20Samaritan" alt="LeetCode Stats" style="width:100%;border-radius:8px;border:1px solid var(--border)" loading="lazy" />
+            </div>
+            <div class="card" style="flex-direction:column;align-items:flex-start">
+              <div style="display:flex;gap:10px;align-items:center"><i class="fa-solid fa-bolt"></i><div><div>Codeforces</div></div></div>
+              <a href="https://codeforces.com/profile/mittu263901" target="_blank" rel="noopener">
+                <img src="https://codeforces-readme-stats.vercel.app/api/card?username=mittu263901&theme=aura_dark&disable_animations=false&show_icons=true&force_username=true" alt="Codeforces Stats" style="width:100%;border-radius:8px;border:1px solid var(--border);background:#0b1020" loading="lazy" />
+              </a>
+            </div>
+            <div class="card" style="flex-direction:column;align-items:flex-start">
+              <div style="display:flex;gap:10px;align-items:center"><i class="fab fa-github"></i><div><div>GitHub</div></div></div>
+              <img src="https://githubcard.com/rakshika2639.svg" alt="GitHub Card" style="width:100%;border-radius:8px;border:1px solid var(--border);background:#fff" loading="lazy" />
+            </div>
+                      </div>
+          <div style="margin-top:10px;color:#9fb3c8;font-size:.95rem">Live stats are loaded from stats.json. Update that file to refresh graphs.</div>
+        </div>
+      </div>
+    </section>
+
+    <a href="contact.html" class="hire-me-btn"><i class="fas fa-handshake"></i> Hire Me</a>
+  </main>
+
+  <script>
+    const fallbackStats={
+      tryhackme:{ rankPercent:1, points:60000, roomsCompleted:350 },
+      leetcode:{ easy:120, medium:90, hard:20 },
+      gfg:{ totalSolved:500, easy:200, medium:220, hard:80, instituteRank:null },
+      codeforces:{ rating:1200, maxRating:1250 },
+      github:{ repos:20, contributions:220 }
+    };
+
+    async function loadStats(){
+      try{
+        const res=await fetch('stats.json',{cache:'no-store'});
+        if(!res.ok) throw new Error('stats.json missing');
+        const s=await res.json();
+        renderStats({ ...fallbackStats, ...s });
+      }catch(e){ renderStats(fallbackStats); }
+    }
+
+    function renderStats(s){
+    }
+
+    loadStats();
+  </script>
+</body>
+</html>

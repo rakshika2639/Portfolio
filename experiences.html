@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakshika - Experiences</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg0: #0a0e17; --bg1: #0d1117; --panel: rgba(22,27,34,.78);
+      --border: #24313a; --text: #c9d1d9; --muted: #9fb3c8; --brand: #58a6ff; --accent: #00ffa7;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;display:flex;min-height:100vh;color:var(--text);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(88,166,255,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(10,247,10,.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 10%, rgba(255,0,255,.04) 0%, transparent 50%),
+        linear-gradient(135deg,var(--bg0) 0%, var(--bg1) 100%);
+      overflow-y:scroll;overflow-x:hidden}
+
+    /* Sidebar */
+    .sidebar{width:280px;background:linear-gradient(135deg,#0d1117 0%,#161b22 50%,#0d1117 100%);color:#fff;display:flex;flex-direction:column;height:100vh;position:fixed;left:0;top:0;border-right:3px solid #30363d;transform:perspective(1200px) rotateY(-3deg);transform-origin:right center;box-shadow:8px 0 25px rgba(0,0,0,.6),inset -8px 0 25px rgba(0,0,0,.4),0 0 60px rgba(88,166,255,.15),inset 0 0 0 1px rgba(88,166,255,.1);backdrop-filter:blur(10px)}
+    .logo{padding:30px 25px;text-align:center;border-bottom:2px solid #30363d;background:linear-gradient(135deg,rgba(13,17,23,.95),rgba(22,27,34,.95))}
+    .logo h1{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,var(--brand),#1f6feb);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-menu{flex:1;padding:30px 0;overflow-y:auto}
+    .nav-menu ul{list-style:none;margin:0;padding:0}
+    .nav-menu a{display:flex;align-items:center;gap:12px;margin:6px 12px;padding:14px 22px;border-radius:10px;text-decoration:none;color:#c9d1d9;background:linear-gradient(135deg,rgba(33,37,43,.75),rgba(22,27,34,.75));border-left:4px solid transparent;transition:.25s}
+    .nav-menu i{width:22px;text-align:center}
+    .nav-menu a:hover{color:var(--brand);border-left-color:var(--brand);transform:translateY(-2px)}
+    .nav-menu .active a{color:var(--brand);border-left-color:var(--brand);background:linear-gradient(135deg,rgba(31,111,235,.25),rgba(88,166,255,.35))}
+    .footer{padding:18px;border-top:2px solid #30363d;text-align:center;color:#8b949e}
+
+    /* Main */
+    .main{flex:1;margin-left:280px;min-height:100vh;position:relative;overflow:auto;padding:36px}
+    .title{font-family:'Courier New',monospace;font-size:3rem;font-weight:900;color:var(--accent);text-shadow:0 0 12px rgba(0,255,167,.45);margin:0 0 8px}
+    .subtitle{color:var(--muted);margin: 0 0 24px}
+
+    /* Experience Console */
+    .console{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.35);overflow:hidden}
+    .console-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(180deg,rgba(36,49,58,.6),rgba(22,27,34,.6));border-bottom:1px solid var(--border)}
+    .dot{width:10px;height:10px;border-radius:50%}
+    .dot.red{background:#ff5f56}.dot.yellow{background:#ffbd2e}.dot.green{background:#27c93f}
+    .console-body{padding:18px 18px 10px; font-family:'Fira Code', 'Courier New', monospace; font-size:14px; line-height:1.6}
+
+    .log-line{opacity:0; transform: translateY(8px); animation: appear .45s forwards}
+    @keyframes appear{to{opacity:1; transform:none}}
+
+    .kw{color:#79c0ff} .str{color:#a5d6ff} .fn{color:#7ee787} .num{color:#ffb86c}
+
+    /* Cards */
+    .grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px;max-width:900px}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+    .card-unified{background:linear-gradient(135deg,var(--panel) 0%, rgba(0,255,167,.05) 100%);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.35);position:relative;overflow:hidden;transition:.3s ease}
+    .card-unified:hover{transform:translateY(-4px);box-shadow:0 15px 35px rgba(0,0,0,.45), 0 0 20px rgba(88,166,255,.2);border-color:var(--brand)}
+    .card-unified::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--accent),var(--brand));box-shadow:0 0 15px rgba(0,255,167,.5)}
+    .role{color:var(--accent);font-weight:800;font-size:1.1rem;margin:0 0 6px}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;color:var(--brand);font-weight:600;margin-bottom:6px}
+    .company{color:var(--muted);font-weight:600;margin-bottom:10px}
+    .bullets{margin:0 0 0 16px}
+    .bullets li{margin:6px 0}
+    
+    /* Role section styling */
+    .role-section{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(0,255,167,.2)}
+    .role-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+    /* Timeline view */
+    .xp-timeline{position:relative;margin-top:20px;padding-left:28px}
+    .xp-timeline:before{content:'';position:absolute;left:10px;top:0;width:2px;height:100%;background:linear-gradient(180deg, rgba(0,255,167,.1), rgba(0,255,167,.6), rgba(0,255,167,.1))}
+    .tl-item{position:relative;margin:16px 0}
+    .tl-item:before{content:'';position:absolute;left:-2px;top:8px;width:12px;height:12px;border:3px solid var(--accent);border-radius:50%;background:var(--bg1);box-shadow:0 0 10px var(--accent)}
+    .tl-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+    .tl-card .role{margin:0 0 6px}
+    .tl-card .meta{margin-bottom:6px}
+    .tl-card .company{margin-bottom:8px}
+
+    /* Controls */
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin: 16px 0 12px}
+    .btn{padding:8px 12px;border:1px solid var(--border);background:var(--panel);border-radius:10px;color:var(--text);cursor:pointer}
+    .btn:hover{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(88,166,255,.1)}
+
+    @media(max-width:992px){.sidebar{width:90px}.main{margin-left:90px}.nav-menu a span{display:none}.grid{grid-template-columns:1fr}}
+    @media(max-width:576px){.sidebar{width:70px}.main{margin-left:70px;padding:24px}.title{font-size:2.2rem}}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>if(window['pdfjsLib']){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}</script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><h1>{Portfolio}</h1></div>
+    <nav class="nav-menu"><ul>
+      <li><a href="index.html"><i class="fas fa-home"></i><span>HOME</span></a></li>
+      <li><a href="about.html"><i class="fas fa-user"></i><span>ABOUT</span></a></li>
+      <li><a href="why-me.html"><i class="fas fa-lightbulb"></i><span>WHY ME</span></a></li>
+      <li><a href="education.html"><i class="fas fa-graduation-cap"></i><span>EDUCATION</span></a></li>
+      <li><a href="certifications.html"><i class="fas fa-award"></i><span>CERTIFICATIONS</span></a></li>
+      <li class="active"><a href="experiences.html"><i class="fas fa-briefcase"></i><span>EXPERIENCES</span></a></li>
+      <li><a href="projects.html"><i class="fas fa-code"></i><span>PROJECTS</span></a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i><span>CONTACT</span></a></li>
+    </ul></nav>
+    <div class="footer">2025 <a href="https://github.com/rakshika2639" style="color:#58a6ff;text-decoration:none">Rakshika</a></div>
+  </aside>
+
+  <main class="main">
+    <h1 class="title"># Experiences</h1>
+    <div class="subtitle">Contributing to projects and initiatives as a developer and team member.</div>
+
+    <div class="controls">
+      <button class="btn" id="sortBtn"><i class="fa-solid fa-arrow-down-wide-short"></i> Sort newest</button>
+      <button class="btn" id="toggleConsole"><i class="fa-solid fa-terminal"></i> Console</button>
+      <button class="btn" id="toggleCards"><i class="fa-solid fa-layer-group"></i> Cards</button>
+      <button class="btn" id="toggleTimeline"><i class="fa-solid fa-timeline"></i> Timeline</button>
+    </div>
+
+    <section class="console" aria-live="polite">
+      <div class="console-bar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span style="margin-left:8px;color:#9fb3c8;font-weight:600">console.log(Experience)</span>
+      </div>
+      <div class="console-body" id="consoleBody">
+        <!-- lines injected -->
+      </div>
+    </section>
+
+    <section id="cards" class="grid" aria-live="polite" style="display:block"></section>
+
+    <section id="timeline" class="xp-timeline" aria-live="polite" style="display:none"></section>
+  </main>
+
+  <script>
+    async function getPdfText(url){
+      if(!window.pdfjsLib) throw new Error('PDF.js failed to load');
+      const pdf=await pdfjsLib.getDocument(url).promise; let s='';
+      for(let p=1;p<=pdf.numPages;p++){ const page=await pdf.getPage(p); const tc=await page.getTextContent(); s+=tc.items.map(i=>i.str).join('\n')+'\n'; }
+      return s;
+    }
+
+    function parseExperience(text){
+      const lines=text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+      const U=s=>s.toUpperCase();
+      const heads=['EXPERIENCE','EXPERIENCES','WORK EXPERIENCE','PROFESSIONAL EXPERIENCE','EMPLOYMENT'];
+      const stops=['EDUCATION','PROJECTS','CERTIFICATIONS','ACHIEVEMENTS','AWARDS','SKILLS','LANGUAGES','INTERESTS','SUMMARY','PROFILE','OBJECTIVE'];
+      const yearRx=/((19|20)\d{2})(\s*(–|-|to)\s*(Present|(19|20)\d{2}))?/i;
+
+      // capture all experience blocks (in case of multiple headings)
+      let i=0; const bucket=[];
+      while(i<lines.length){
+        const l=U(lines[i]).replace(/:$/,'');
+        if(heads.includes(l)){
+          let j=i+1; while(j<lines.length){ const u=U(lines[j]).replace(/:$/,''); if(heads.includes(u)) { j++; continue;} if(stops.includes(u)) break; bucket.push(lines[j]); j++; }
+          i=j; continue;
+        }
+        i++;
+      }
+      const sec=bucket.length?bucket:lines; // fallback if not found
+
+      // Build role entries
+      const roleRx=/(Engineer|Developer|Intern|Analyst|Manager|Lead|Consultant|Architect|Security|Researcher)/i;
+      const companyMarker=/(Company|Inc\.|LLC|Ltd\.|Pvt|Private|Corporation|Corp\.|Technologies|Solutions|Labs|Studio|Systems)/i;
+
+      const items=[]; let cur=null;
+      for(const l of sec){
+        const isStart=yearRx.test(l) || roleRx.test(l) || /^[\u2022•\-]/.test(l);
+        if(isStart && (!cur || yearRx.test(l) || roleRx.test(l))){
+          if(cur) items.push(cur);
+          cur={role:'',company:'',period:'',bullets:[]};
+          const y=l.match(yearRx); if(y) cur.period=y[0].replace(/\s{2,}/g,' ').replace(/to/i,'–');
+          const cleaned=l.replace(yearRx,'').replace(/^[-•\u2022]\s*/,'').trim();
+          // Split role at - or @ to capture company hints
+          const parts=cleaned.split(/\s[@-]\s|\s-\s/);
+          cur.role=(parts[0]||'').trim();
+          if(parts[1]) cur.company=parts.slice(1).join(' - ').trim();
+          if(!cur.company){
+            const m=l.match(new RegExp('.*?('+companyMarker.source+').*','i')); if(m) cur.company=l.trim();
+          }
+        } else if(cur){
+          if(!cur.period){ const y2=l.match(yearRx); if(y2) cur.period=y2[0].replace(/\s{2,}/g,' ').replace(/to/i,'–'); }
+          if(!cur.company){ const cm=l.match(new RegExp('.*?('+companyMarker.source+').*','i')); if(cm) cur.company=cm[0].trim(); }
+          if(/^[\u2022•\-]/.test(l)) cur.bullets.push(l.replace(/^[-•\u2022]\s*/,''));
+        }
+      }
+      if(cur) items.push(cur);
+
+      function years(p){ if(!p) return {start:null,end:null}; const m=p.match(/(19|20)\d{2}/g); if(!m) return {start:null,end:null}; const s=parseInt(m[0]); const e=(m.length>1?parseInt(m[1]):(p.toLowerCase().includes('present')?Infinity:s)); return {start:s,end:e}; }
+
+      return items.map(x=>{ const y=years(x.period); return { role:x.role||'Experience', company:x.company||'', period:x.period||'', bullets:x.bullets, start:y.start, end:y.end }; })
+                  .filter(it=>it.role.length>0 || it.company.length>0);
+    }
+
+    function sortNewest(list){
+      return [...list].sort((a,b)=>{ const ae=(a.end===Infinity?99999:(a.end||-1)); const be=(b.end===Infinity?99999:(b.end||-1)); if(be!==ae) return be-ae; const as=(a.start||-1), bs=(b.start||-1); return bs-as; });
+    }
+
+    function renderConsole(list){
+      const el=document.getElementById('consoleBody'); el.innerHTML='';
+      const filtered=list.slice(0,2);
+      const lines=[`> Parsing cv.pdf ...`, `> Found 2 experience entrie(s)`];
+      filtered.forEach((it,idx)=>{
+        lines.push(`const exp${idx} = {`);
+        lines.push(`  role: \x22${(it.role||'').replace(/\x22/g,'\\\x22')}\x22,`);
+        lines.push(`  company: \x22${(it.company||'').replace(/\x22/g,'\\\x22')}\x22,`);
+        lines.push(`  period: \x22${(it.period||'').replace(/\x22/g,'\\\x22')}\x22,`);
+        if(it.bullets && it.bullets.length){
+          lines.push(`  bullets: [`);
+          it.bullets.forEach(b=>{ lines.push(`    \x22${b.replace(/\x22/g,'\\\x22')}\x22,`); });
+          lines.push(`  ]`);
+        }
+        lines.push(`};`);
+      });
+      // animate lines
+      lines.forEach((t,i)=>{
+        const div=document.createElement('div'); div.className='log-line'; div.style.animationDelay=`${i*0.05}s`;
+        div.innerHTML=highlight(t); el.appendChild(div);
+      })
+    }
+
+    function highlight(s){
+      return s
+        .replace(/(const|let|var|return|new)\b/g,'<span class="kw">$1<\/span>')
+        .replace(/:\s*\x22([^\x22]*)\x22/g,': <span class="str">"$1"<\/span>')
+        .replace(/\b(\d{4}|Infinity)\b/g,'<span class="num">$1<\/span>')
+        .replace(/(exp\d+)\s=\s{/g,'<span class="fn">$1<\/span> = {');
+    }
+
+    function renderCards(list){
+      const host=document.getElementById('cards'); host.innerHTML='';
+      const filtered=list.slice(0,2);
+      if(!filtered.length){ host.innerHTML='<div style="color:#9fb3c8;text-align:center;padding:20px">No experience found in cv.pdf.</div>'; return; }
+      const card=document.createElement('div'); card.className='card-unified';
+      const header=document.createElement('div'); header.style.marginBottom='12px';
+      const title=document.createElement('div'); title.style.fontSize='1.4rem'; title.style.fontWeight='900'; title.style.color='var(--accent)'; title.textContent='Professional Experiences'; header.appendChild(title);
+      const subtitle=document.createElement('div'); subtitle.style.color='var(--muted)'; subtitle.style.fontSize='0.9rem'; subtitle.style.marginTop='4px'; subtitle.textContent='Actively contributing to innovative projects and open-source initiatives'; header.appendChild(subtitle);
+      card.appendChild(header);
+      
+      filtered.forEach((it,idx)=>{
+        const section=document.createElement('div'); section.className='role-section';
+        const role=document.createElement('div'); role.className='role'; role.textContent=it.role; section.appendChild(role);
+        const meta=document.createElement('div'); meta.className='meta'; if(it.period){const sp=document.createElement('span'); sp.innerHTML='<i class="fa-regular fa-calendar"></i> '+it.period; meta.appendChild(sp);} section.appendChild(meta);
+        if(it.company){ const co=document.createElement('div'); co.className='company'; co.innerHTML='<i class="fa-solid fa-building"></i> '+it.company; section.appendChild(co); }
+        if(it.bullets && it.bullets.length){ const ul=document.createElement('ul'); ul.className='bullets'; it.bullets.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; ul.appendChild(li); }); section.appendChild(ul); }
+        card.appendChild(section);
+      });
+      host.appendChild(card);
+    }
+
+    function renderTimeline(list){
+      const host=document.getElementById('timeline'); if(!host) return; host.innerHTML='';
+      const filtered=list.slice(0,2);
+      if(!filtered.length){ host.innerHTML='<div style="color:#9fb3c8;padding:10px 0">No experience found in cv.pdf.</div>'; return; }
+      filtered.forEach(it=>{
+        const item=document.createElement('div'); item.className='tl-item';
+        const card=document.createElement('div'); card.className='tl-card';
+        const role=document.createElement('div'); role.className='role'; role.textContent=it.role; card.appendChild(role);
+        const meta=document.createElement('div'); meta.className='meta'; if(it.period){ const sp=document.createElement('span'); sp.innerHTML='<i class="fa-regular fa-calendar"></i> '+it.period; meta.appendChild(sp);} card.appendChild(meta);
+        if(it.company){ const co=document.createElement('div'); co.className='company'; co.textContent=it.company; card.appendChild(co); }
+        if(it.bullets && it.bullets.length){ const ul=document.createElement('ul'); ul.className='bullets'; it.bullets.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; ul.appendChild(li); }); card.appendChild(ul); }
+        item.appendChild(card); host.appendChild(item);
+      });
+    }
+
+    let data=[]; let newest=true; let cardsVisible=true;
+    function injectManualExperiences(list){
+      const manual=[
+        {
+          role:'Web Development Team (Core Member)',
+          company:'iCreate Club · VIT Bhopal',
+          period:'August 2025 – Present',
+          bullets:[
+            'Serving as a core member of the Web Development Team in the iCreate Club at VIT Bhopal, contributing to innovative projects and events.',
+            'Collaborated effectively in a team environment to design and develop a live leaderboard for the Funfinity 2.0 event, enhancing real-time user engagement.',
+            'Applied skills in web development technologies to create dynamic, user-friendly solutions for club initiatives.',
+            'Actively participated in planning and executing technical aspects of club events, ensuring seamless functionality and user experience.',
+            'Strengthened teamwork and communication skills through close coordination with club members to meet project deadlines and objectives.'
+          ],
+          start:2025,
+          end: Infinity
+        },
+        {
+          role:'Contributor',
+          company:'GSSOC \u201925',
+          period:'July 2025 – October 2025',
+          bullets:[
+            'Actively participating as a contributor in the GSSOC \'25 program, a 3-month open-source initiative aimed at fostering skills in collaborative software development.',
+            'Engaged with diverse projects, implementing features, fixing bugs, and enhancing documentation under the guidance of experienced mentors.',
+            'Collaborated with a global community, leveraging Git and GitHub to submit pull requests and contribute to real-world open-source projects, gaining hands-on experience in modern development workflows.',
+            'Demonstrated eagerness to learn by tackling beginner-friendly issues and adapting to feedback, contributing to personal growth and project improvement.'
+          ],
+          start:2025,
+          end:2025
+        }
+      ];
+      return [...manual, ...list];
+    }
+
+    function init(){
+      data=injectManualExperiences([]);
+      data=sortNewest(data);
+      renderConsole(data);
+      renderCards(data);
+    }
+
+    document.getElementById('sortBtn').addEventListener('click',()=>{ newest=!newest; const sort=newest?sortNewest:(l=>[...l].reverse()); const btn=document.getElementById('sortBtn'); data=sort(data); btn.innerHTML='<i class="fa-solid fa-arrow-down-wide-short"></i> '+(newest?'Sort newest':'Sort oldest'); renderConsole(data); if(cardsVisible) renderCards(data); const tl=document.getElementById('timeline'); if(tl && tl.style.display!=='none') renderTimeline(data); });
+    document.getElementById('toggleConsole').addEventListener('click',()=>{ document.querySelector('.console').style.display='block'; document.getElementById('cards').style.display='none'; document.getElementById('timeline').style.display='none'; });
+    document.getElementById('toggleCards').addEventListener('click',()=>{ document.querySelector('.console').style.display='none'; document.getElementById('cards').style.display='grid'; document.getElementById('timeline').style.display='none'; renderCards(data); });
+    document.getElementById('toggleTimeline').addEventListener('click',()=>{ document.querySelector('.console').style.display='none'; document.getElementById('cards').style.display='none'; document.getElementById('timeline').style.display='block'; renderTimeline(data); });
+  
+    // Render timeline initially if desired (keep hidden by default)
+    // renderTimeline(data);
+
+    // bootstrap
+    init();
+  </script>
+</body>
+</html>
