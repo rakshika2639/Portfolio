@@ -1469,12 +1469,20 @@
             }
         }, 500);
 
-        // Page visit counter
+        // Page visit counter with Firebase
+        let db;
         function updateVisitCounter() {
-            let visits = localStorage.getItem('portfolioVisits') || 0;
-            visits = parseInt(visits) + 1;
-            localStorage.setItem('portfolioVisits', visits);
-            document.getElementById('visit-count').textContent = visits;
+            if (!db) return;
+            const counterRef = db.ref('visitCount');
+            counterRef.transaction(current => {
+                return (current || 0) + 1;
+            }).then(() => {
+                counterRef.on('value', snapshot => {
+                    document.getElementById('visit-count').textContent = snapshot.val() || 0;
+                });
+            }).catch(err => {
+                console.error('Counter update failed:', err);
+            });
         }
 
         // Check if user is returning from another page - skip intro if so
@@ -1798,6 +1806,28 @@
         if (initialInput) {
             initialInput.focus();
         }
+    </script>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js"></script>
+
+    <script>
+        // Firebase Configuration - REPLACE WITH YOUR CONFIG
+        const firebaseConfig = {
+  apiKey: "AIzaSyC-3gMBc8g-VpZbu-C2-EJQTndGV13fNXo",
+  authDomain: "portfolio-visitors-f87b4.firebaseapp.com",
+  databaseURL: "https://portfolio-visitors-f87b4-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "portfolio-visitors-f87b4",
+  storageBucket: "portfolio-visitors-f87b4.firebasestorage.app",
+  messagingSenderId: "241143493584",
+  appId: "1:241143493584:web:8f5f0f79a0854ca109ffd5"
+};
+
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+
+        updateVisitCounter();
     </script>
 
     <!-- Download CV Button -->
