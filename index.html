@@ -1477,6 +1477,10 @@
             counterRef.transaction(current => {
                 return (current || 0) + 1;
             }).then(() => {
+                counterRef.once('value', snapshot => {
+                    const count = snapshot.val() || 0;
+                    document.getElementById('visit-count').textContent = count;
+                });
                 counterRef.on('value', snapshot => {
                     document.getElementById('visit-count').textContent = snapshot.val() || 0;
                 });
@@ -1539,9 +1543,6 @@
                 document.getElementById('intro').style.display = 'none';
             }
         });
-
-        // Update visit counter on page load
-        updateVisitCounter();
 
         // Terminal functionality
         const terminalOutput = document.getElementById('terminal-output');
@@ -1827,7 +1828,7 @@
         firebase.initializeApp(firebaseConfig);
         db = firebase.database();
 
-        updateVisitCounter();
+        setTimeout(() => updateVisitCounter(), 500);
     </script>
 
     <!-- Download CV Button -->
