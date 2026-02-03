@@ -44,9 +44,7 @@ p, li, a, span{font-size:clamp(0.9rem, 1.6vw, 1.05rem)}
 #hamburger-toggle:hover span{background:#58a6ff;box-shadow:0 0 8px rgba(88,166,255,.6)}
 #hamburger-toggle span:nth-child(2){transition:opacity .3s ease}
 
-/* Visitor counter in navbar - hidden on desktop, shown in menu on mobile */
-.nav-menu .visitor-counter{display:none}
-
+/* Logo hide/show on mobile with hamburger */
 @media (max-width:768px){
   #hamburger-toggle{display:flex}
   .logo{
@@ -57,18 +55,7 @@ p, li, a, span{font-size:clamp(0.9rem, 1.6vw, 1.05rem)}
   }
   .nav-menu{display:none;flex-direction:column;width:100%;position:absolute;top:100%;left:0;right:0;background:linear-gradient(135deg,#0d1117,#161b22);border-bottom:1px solid #30363d;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;box-shadow:0 6px 16px rgba(0,0,0,.5)}
   .nav-menu.nav-open{display:flex;max-height:calc(100vh - 60px);padding:8px 0;overflow-y:auto;top:120px}
-  .nav-menu a{margin:0;border-radius:0;padding:14px 18px;display:flex;align-items:center;gap:12px;border-left:4px solid transparent;font-size:0.95rem}
-  .nav-menu a:hover{border-left-color:#58a6ff;background:rgba(88,166,255,.1)}
-  .nav-menu .active a{border-left-color:#00ffa7;background:rgba(0,255,167,.08);color:#00ffa7}
-  .main, .main-content{margin-left:0 !important;padding-top:72px;padding-left:16px;padding-right:16px;padding-bottom:16px}
-  .sidebar .footer{display:none}
 }
-  .nav-menu a{margin:0;border-radius:0;padding:14px 18px;display:flex;align-items:center;gap:12px;border-left:4px solid transparent;font-size:0.95rem}
-  .nav-menu a:hover{border-left-color:#58a6ff;background:rgba(88,166,255,.1)}
-  .nav-menu .active a{border-left-color:#00ffa7;background:rgba(0,255,167,.08);color:#00ffa7}
-  .main, .main-content{margin-left:0 !important;padding-top:60px;padding-left:16px;padding-right:16px;padding-bottom:16px}
-  .sidebar .footer{display:none}
-
 
 /* Small phones: tighten spacing */
 @media (max-width: 420px){
@@ -93,7 +80,7 @@ body { overflow-x: hidden; }
   /* Force primary grid areas to stack */
   .hero, .contact_us, .sections, .chips, .panels, .grid { display: block !important; grid-template-columns: none !important; gap: 12px !important }
 
-  .idcard, .dossier, .main, .main-content { width:calc(100% - 32px) !important; margin-left:auto !important; margin-right:auto !important; padding:16px !important }
+  .idcard, .dossier { width:calc(100% - 32px) !important; margin-left:auto !important; margin-right:auto !important; padding:16px !important }
 
   /* Make profile image smaller and centered */
   .photo { width:140px !important; height:auto !important; aspect-ratio:1/1 !important; margin:8px auto 12px !important }
@@ -103,10 +90,6 @@ body { overflow-x: hidden; }
 
   /* Buttons and chips full-width for easy tapping */
   .hire-me-btn, .chip { display:inline-block; width:auto; max-width:100%; margin:6px 4px 6px 0}
-
-  /* Reduce sidebar impact earlier to avoid horizontal overflow */
-  .sidebar { transform:none !important; width:100% !important; position:fixed !important; top:0; left:0; right:0; height:auto !important }
-  .main, .main-content { margin-left:0 !important; padding-top:72px !important; padding-left:12px !important; padding-right:12px !important }
 }
 
 /* Extra-small phones */
@@ -117,3 +100,4 @@ body { overflow-x: hidden; }
   .visitor-counter{padding:8px;font-size:0.85rem}
   .hire-me-btn{padding:12px 18px;font-size:0.9rem}
 }
+
