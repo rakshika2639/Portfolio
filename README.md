@@ -240,7 +240,7 @@ Feel free to fork, modify, and use this portfolio as inspiration for your own!
 
 ## � Resources & References
 
-- **Project Inspiration**: https://roadmap.sh/projects/basic-html-website
+- **Project Inspiration**: https://roadmap.sh/projects/portfolio-website
 - **Live Demo**: https://rakshika2639.github.io/Portfolio/
 - **Repository**: https://github.com/rakshika2639/Portfolio
 
