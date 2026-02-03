@@ -1,0 +1,119 @@
+
+:root{
+  --safe-padding: 16px;
+}
+html{font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-size:16px}
+img, picture, video, svg { max-width:100%; height:auto; display:block; }
+*{box-sizing:border-box}
+body{min-width:320px}
+
+/* Layout helpers used across pages */
+.main, .main-content, .dossier, .idcard { max-width:1200px; margin-left:auto; margin-right:auto }
+
+/* Responsive typography */
+h1{font-size:clamp(1.6rem, 3.2vw, 2.6rem)}
+h2{font-size:clamp(1.25rem, 2.2vw, 2rem)}
+p, li, a, span{font-size:clamp(0.9rem, 1.6vw, 1.05rem)}
+
+/* Make sidebars collapse to top bar on narrow screens */
+@media (max-width: 992px){
+  .sidebar{width:90px !important}
+  .main, .main-content{margin-left:90px !important; padding:var(--safe-padding)}
+  .nav-menu a span{display:none}
+}
+
+@media (max-width: 768px){
+  /* Turn sidebar into a horizontal top bar */
+  .sidebar{position:fixed !important;top:0;left:0;right:0;width:100% !important;height:auto !important;display:flex;flex-direction:row;align-items:center;justify-content:space-between;padding:12px 16px;border-right:none;border-bottom:2px solid rgba(0,255,167,.2);transform:none !important;z-index:9999;background:linear-gradient(135deg,rgba(13,17,23,.98),rgba(22,27,34,.98))}
+  .logo{padding:0;flex:0 0 auto;margin:0}
+  .logo h1{font-size:1.3rem;margin:0;font-weight:800;letter-spacing:1.5px}
+  .nav-menu{display:none;flex-direction:column;width:100%;position:absolute;top:100%;left:0;right:0;background:linear-gradient(135deg,#0d1117,#161b22);border-bottom:1px solid #30363d;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+  .nav-menu.nav-open{display:flex;max-height:calc(100vh - 60px);padding:8px 0;overflow-y:auto}
+  .nav-menu a{margin:0;border-radius:0;padding:14px 18px;display:flex;align-items:center;gap:12px;border-left:4px solid transparent;font-size:0.95rem}
+  .nav-menu a:hover{border-left-color:#58a6ff;background:rgba(88,166,255,.1)}
+  .nav-menu .active a{border-left-color:#00ffa7;background:rgba(0,255,167,.08);color:#00ffa7}
+  .main, .main-content{margin-left:0 !important;padding-top:72px;padding-left:16px;padding-right:16px;padding-bottom:16px}
+  .sidebar .footer{display:none}
+}
+
+/* Hamburger Toggle Menu for Mobile */
+#hamburger-toggle{
+  display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;color:#c9d1d9;padding:6px;align-items:center;justify-content:center;width:38px;height:38px;position:relative;z-index:10001;flex:0 0 auto;transition:.3s
+}
+#hamburger-toggle span{display:block;width:20px;height:2.5px;background:#00ffa7;border-radius:1.5px;transition:.3s ease}
+#hamburger-toggle:hover span{background:#58a6ff;box-shadow:0 0 8px rgba(88,166,255,.6)}
+#hamburger-toggle span:nth-child(2){transition:opacity .3s ease}
+
+/* Visitor counter in navbar - hidden on desktop, shown in menu on mobile */
+.nav-menu .visitor-counter{display:none}
+
+@media (max-width:768px){
+  #hamburger-toggle{display:flex}
+  .logo{
+    display:none;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;padding:12px 16px !important;border-bottom:1px solid rgba(0,255,167,.15) !important;background:linear-gradient(135deg,rgba(0,255,167,.08),rgba(88,166,255,.05)) !important;position:absolute;top:60px;left:0;right:0;width:100%;z-index:9998
+  }
+  .logo.logo-open{
+    display:block;opacity:1;visibility:visible
+  }
+  .nav-menu{display:none;flex-direction:column;width:100%;position:absolute;top:100%;left:0;right:0;background:linear-gradient(135deg,#0d1117,#161b22);border-bottom:1px solid #30363d;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+  .nav-menu.nav-open{display:flex;max-height:calc(100vh - 60px);padding:8px 0;overflow-y:auto;top:120px}
+  .nav-menu a{margin:0;border-radius:0;padding:14px 18px;display:flex;align-items:center;gap:12px;border-left:4px solid transparent;font-size:0.95rem}
+  .nav-menu a:hover{border-left-color:#58a6ff;background:rgba(88,166,255,.1)}
+  .nav-menu .active a{border-left-color:#00ffa7;background:rgba(0,255,167,.08);color:#00ffa7}
+  .main, .main-content{margin-left:0 !important;padding-top:72px;padding-left:16px;padding-right:16px;padding-bottom:16px}
+  .sidebar .footer{display:none}
+}
+  .nav-menu a{margin:0;border-radius:0;padding:14px 18px;display:flex;align-items:center;gap:12px;border-left:4px solid transparent;font-size:0.95rem}
+  .nav-menu a:hover{border-left-color:#58a6ff;background:rgba(88,166,255,.1)}
+  .nav-menu .active a{border-left-color:#00ffa7;background:rgba(0,255,167,.08);color:#00ffa7}
+  .main, .main-content{margin-left:0 !important;padding-top:60px;padding-left:16px;padding-right:16px;padding-bottom:16px}
+  .sidebar .footer{display:none}
+
+
+/* Small phones: tighten spacing */
+@media (max-width: 420px){
+  :root{--safe-padding:12px}
+  .main, .main-content{padding:12px}
+  .hire-me-btn{padding:12px 18px;font-size:0.95rem}
+}
+
+/* Ensure forms and code blocks are scrollable on small screens */
+pre, code, table { max-width:100%; overflow:auto }
+
+/* Utility: center page content on very wide screens */
+@media (min-width:1400px){
+  .main, .main-content{max-width:1100px}
+}
+
+/* Portrait/mobile improvements: force single-column layouts and safer paddings */
+html, body { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body { overflow-x: hidden; }
+
+@media (max-width: 900px){
+  /* Force primary grid areas to stack */
+  .hero, .contact_us, .sections, .chips, .panels, .grid { display: block !important; grid-template-columns: none !important; gap: 12px !important }
+
+  .idcard, .dossier, .main, .main-content { width:calc(100% - 32px) !important; margin-left:auto !important; margin-right:auto !important; padding:16px !important }
+
+  /* Make profile image smaller and centered */
+  .photo { width:140px !important; height:auto !important; aspect-ratio:1/1 !important; margin:8px auto 12px !important }
+  .badge { text-align:center !important; margin-top:12px }
+  .name{font-size:1.25rem;font-weight:900;margin:8px 0 4px}
+  .role{font-size:0.95rem;margin-bottom:12px}
+
+  /* Buttons and chips full-width for easy tapping */
+  .hire-me-btn, .chip { display:inline-block; width:auto; max-width:100%; margin:6px 4px 6px 0}
+
+  /* Reduce sidebar impact earlier to avoid horizontal overflow */
+  .sidebar { transform:none !important; width:100% !important; position:fixed !important; top:0; left:0; right:0; height:auto !important }
+  .main, .main-content { margin-left:0 !important; padding-top:72px !important; padding-left:12px !important; padding-right:12px !important }
+}
+
+/* Extra-small phones */
+@media (max-width:420px){
+  .photo{width:120px !important}
+  .name{font-size:1.1rem}
+  .role{font-size:0.9rem}
+  .visitor-counter{padding:8px;font-size:0.85rem}
+  .hire-me-btn{padding:12px 18px;font-size:0.9rem}
+}

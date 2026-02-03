@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 :  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Rakshika - About</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <style>
     :root{
       --bg0:#0a0e17; --bg1:#0d1117; --panel:rgba(22,27,34,.78); --panel-2:rgba(22,27,34,.9);
@@ -42,19 +42,23 @@
     .scan{position:absolute;left:0;right:0;height:2px;top:10%;background:linear-gradient(90deg,transparent,rgba(0,255,167,.5),transparent);box-shadow:0 0 10px rgba(0,255,167,.6);animation:scan 4s linear infinite}
     @keyframes scan{0%{top:8%}50%{top:92%}100%{top:8%}}
 
-    .badge{margin-top:14px;background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:12px}
-    .name{font-family:'Courier New',monospace;font-weight:900;color:var(--accent);font-size:1.4rem;text-shadow:0 0 10px rgba(0,255,167,.4)}
-    .role{color:var(--brand);font-weight:700;margin-top:6px}
+    .badge{margin-top:14px;background:linear-gradient(135deg,var(--panel),rgba(22,27,34,.95));border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+    .name{font-family:'Courier New',monospace;font-weight:900;color:var(--accent);font-size:clamp(1.2rem,4vw,1.5rem);text-shadow:0 0 10px rgba(0,255,167,.4);margin:8px 0 6px}
+    .role{color:var(--brand);font-weight:700;margin-top:6px;font-size:clamp(0.85rem,2.5vw,1rem)}
 
-    .contacts{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-    .contacts a{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:8px 12px;color:var(--text);text-decoration:none;transition:.2s;line-height:1}
-    .contacts a i{display:inline-block;min-width:16px;text-align:center;font-size:1rem}
-    .contacts a span{display:inline-block;vertical-align:middle}
+    .contacts{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+    .contacts a{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);text-decoration:none;transition:.2s;line-height:1;font-size:0.85rem}
+    .contacts a i{display:inline-block;min-width:16px;text-align:center;font-size:0.95rem}
+    .contacts a span{display:none}
     .contacts a:hover{color:var(--brand);border-color:var(--brand);box-shadow:0 0 0 3px rgba(88,166,255,.1)}
+    
+    @media(min-width:768px){
+      .contacts a span{display:inline-block}
+    }
 
     /* Dossier */
     .dossier{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 10px 25px rgba(0,0,0,.35)}
-    .title{font-family:'Courier New',monospace;font-size:2.2rem;font-weight:900;color:var(--accent);text-shadow:0 0 12px rgba(0,255,167,.45);margin:0 0 10px;letter-spacing:.5px}
+    .title{font-family:'Courier New',monospace;font-size:clamp(1.8rem,5vw,2.2rem);font-weight:900;color:var(--accent);text-shadow:0 0 12px rgba(0,255,167,.45);margin:0 0 10px;letter-spacing:.5px}
     .summary{color:#b8c2cc;line-height:1.7}
 
     .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
@@ -81,6 +85,10 @@
     @media(max-width:1100px){.hero{grid-template-columns:1fr}}
     @media(max-width:992px){.sidebar{width:90px}.main{margin-left:90px}.nav-menu a span{display:none}}
     @media(max-width:576px){.sidebar{width:70px}.main{margin-left:70px;padding:24px}.title{font-size:1.8rem}}
+    /* Visitor counter */
+    .visitor-counter{margin-top:14px;padding:12px 10px;border-radius:8px;background:linear-gradient(135deg,rgba(0,255,167,.05),rgba(88,166,255,.03));border:1px solid rgba(0,255,167,.15);color:#bfe6ff;display:flex;flex-direction:column;gap:6px;text-align:center}
+    .visitor-counter .label{font-size:0.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.8px}
+    .visitor-counter .value{font-family:'Courier New',monospace;font-weight:900;color:var(--accent);font-size:1.1rem;text-shadow:0 0 8px rgba(0,255,167,.3)}
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>if(window['pdfjsLib']){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}</script>
@@ -95,6 +103,7 @@
   <!-- Sidebar -->
   <nav class="sidebar">
     <div class="logo"><h1>{Portfolio}</h1></div>
+    <button id="hamburger-toggle"><span></span><span></span><span></span></button>
     <div class="nav-menu">
       <ul>
         <li><a href="index.html"><i class="fas fa-home"></i> <span>HOME</span></a></li>
@@ -131,6 +140,10 @@
             <a href="https://www.codechef.com/users/rakshika01" target="_blank" title="CodeChef" aria-label="CodeChef"><i class="fa-solid fa-utensils"></i><span>codechef</span></a>
             <a href="https://www.hackerrank.com/profile/mittu263901" target="_blank" title="HackerRank" aria-label="HackerRank"><i class="fa-solid fa-laptop-code"></i><span>hackerrank</span></a>
             <a href="https://www.interviewbit.com/profile/1xm-qgr5a5/" target="_blank" title="InterviewBit" aria-label="InterviewBit"><i class="fa-solid fa-briefcase"></i><span>interviewbit</span></a>
+          </div>
+          <div class="visitor-counter" title="Total website visitors (global)">
+            <div class="label">Digital Footprint — Total visitors</div>
+            <div class="value" id="visitorCountValue">—</div>
           </div>
         </div>
       </div>
@@ -248,5 +261,36 @@
 
     // LinkedIn: Direct client-side fetching is blocked by CORS. If you want enriched About data from LinkedIn, expose it via a backend or paste structured data to merge here.
   </script>
+  <script>
+    (function(){
+      // Use hostname as namespace where possible; fallback for file:// testing
+      const rawHost = (location && location.hostname) ? location.hostname : 'portfolio-local';
+      const namespace = rawHost.replace(/\./g,'-').toLowerCase();
+      const key = 'global-visitors';
+      const base = `https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`;
+      // cache-busting to avoid browser cache and ensure increment on each load
+      const endpoint = base + '?ts=' + Date.now();
+
+      function setCount(n){
+        const el = document.getElementById('visitorCountValue');
+        if(!el) return;
+        el.textContent = (typeof n === 'number') ? n.toLocaleString() : n;
+      }
+
+      const el = document.getElementById('visitorCountValue');
+      if(el) el.textContent = 'Updating...';
+
+      // Try to increment the global counter on each page load with explicit no-cache
+      fetch(endpoint, { method: 'GET', cache: 'no-store', mode: 'cors' })
+        .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(data => {
+          console.log('CountAPI response', data);
+          if(data && typeof data.value !== 'undefined') setCount(data.value);
+          else setCount('N/A');
+        })
+        .catch(err => { console.warn('CountAPI error', err); setCount('N/A'); });
+    })();
+  </script>
+  <script src="assets/js/nav-toggle.js"></script>
 </body>
 </html>

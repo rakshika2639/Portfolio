@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Rakshika - Why Me</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <style>
     :root {
       --bg0:#0a0e17; --bg1:#0d1117; --panel:rgba(22,27,34,.78); --border:#24313a;
@@ -77,6 +78,7 @@
 <body>
   <aside class="sidebar">
     <div class="logo"><h1>{Portfolio}</h1></div>
+    <button id="hamburger-toggle"><span></span><span></span><span></span></button>
     <nav class="nav-menu"><ul>
       <li><a href="index.html"><i class="fas fa-home"></i><span>HOME</span></a></li>
       <li><a href="about.html"><i class="fas fa-user"></i><span>ABOUT</span></a></li>
@@ -184,5 +186,6 @@
 
     loadStats();
   </script>
+  <script src="assets/js/nav-toggle.js"></script>
 </body>
 </html>
