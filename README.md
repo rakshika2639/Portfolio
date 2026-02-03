@@ -238,7 +238,13 @@ Feel free to fork, modify, and use this portfolio as inspiration for your own!
 - **GitHub**: https://github.com/rakshika2639
 - **Portfolio**: https://rakshika2639.github.io/Portfolio/
 
-## 📄 License
+## � Resources & References
+
+- **Project Inspiration**: https://roadmap.sh/projects/basic-html-website
+- **Live Demo**: https://rakshika2639.github.io/Portfolio/
+- **Repository**: https://github.com/rakshika2639/Portfolio
+
+## �📄 License
 
 This project is open source and available under the MIT License.
 
