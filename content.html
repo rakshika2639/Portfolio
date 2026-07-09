@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Content - Rakshika</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <style>
+    body{font-family:Segoe UI,system-ui;background:linear-gradient(135deg,#0a0e17,#0d1117);color:#c9d1d9;min-height:100vh;margin:0}
+    .sidebar{width:280px;position:fixed;left:0;top:0;height:100vh;background:linear-gradient(135deg,#0d1117,#161b22);border-right:3px solid #30363d;overflow-y:auto}
+    main{margin-left:280px;padding:36px}
+    
+    /* Tab Styles */
+    .tabs{display:flex;gap:0;border-bottom:2px solid #30363d;margin-bottom:24px}
+    .tab-btn{background:transparent;border:none;color:#8b949e;padding:12px 18px;cursor:pointer;font-size:0.95rem;font-weight:500;border-bottom:3px solid transparent;transition:all .2s ease}
+    .tab-btn:hover{color:#58a6ff}
+    .tab-btn.active{color:#58a6ff;border-bottom-color:#58a6ff}
+    
+    .tab-content{display:none}
+    .tab-content.active{display:block}
+    
+    /* Blog/Video section styles */
+    .blog-item, .video-item{background:rgba(22,27,34,.8);padding:16px;border:1px solid #24313a;border-radius:10px;margin-bottom:14px}
+    .blog-item a, .video-item a{color:#58a6ff;text-decoration:none;font-weight:500}
+    .blog-item a:hover, .video-item a:hover{text-decoration:underline}
+    .blog-desc, .video-desc{color:#b8c2cc;margin-top:8px;font-size:0.9rem}
+    
+    .video-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+    @media(min-width:900px){.video-grid{grid-template-columns:1fr 1fr}}
+    
+    .video-wrap{background:#000;border-radius:8px;overflow:hidden;position:relative}
+    .video-preview{position:relative;cursor:pointer;background:#000;display:block}
+    .video-preview img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.78);transition:transform .25s ease}
+    .video-preview:hover img{transform:scale(1.03)}
+    .video-preview .play-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:999px;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;box-shadow:0 8px 20px rgba(0,0,0,.6)}
+    .video-caption{padding:10px 12px;color:#bfcfda;font-size:0.9rem;background:rgba(0,0,0,.2)}
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="logo" style="padding:20px;text-align:center"><h1 style="margin:0;background:linear-gradient(90deg,#58a6ff,#1f6feb);-webkit-background-clip:text;color:transparent">{Portfolio}</h1></div>
+    <button id="hamburger-toggle" style="position:fixed;top:12px;right:12px"><span></span><span></span><span></span></button>
+    <div class="nav-menu">
+      <ul style="list-style:none;padding:0 12px;margin:0">
+        <li><a href="index.html"><i class="fas fa-home"></i> <span>HOME</span></a></li>
+        <li><a href="about.html"><i class="fas fa-user"></i> <span>ABOUT</span></a></li>
+        <li><a href="why-me.html"><i class="fas fa-lightbulb"></i> <span>WHY ME</span></a></li>
+        <li><a href="education.html"><i class="fas fa-graduation-cap"></i> <span>EDUCATION</span></a></li>
+        <li><a href="certifications.html"><i class="fas fa-award"></i> <span>CERTIFICATIONS</span></a></li>
+        <li><a href="experiences.html"><i class="fas fa-briefcase"></i> <span>EXPERIENCES</span></a></li>
+        <li><a href="projects.html"><i class="fas fa-code"></i> <span>PROJECTS</span></a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> <span>CONTACT</span></a></li>
+        <li class="active"><a href="content.html"><i class="fas fa-layer-group"></i> <span>CONTENT</span></a></li>
+      </ul>
+    </div>
+    <div class="footer" style="padding:18px;border-top:2px solid #30363d;text-align:center;color:#8b949e">2025 <a href="https://github.com/rakshika2639" style="color:#58a6ff">Rakshika</a></div>
+  </nav>
+
+  <main>
+    <h2 style="color:#58a6ff;margin-top:6px">Content</h2>
+    <p style="color:#b8c2cc;max-width:760px">Blogs, videos, and resources from across my platforms.</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="blogs"><i class="fas fa-blog"></i> Blogs</button>
+      <button class="tab-btn" data-tab="videos"><i class="fas fa-video"></i> Videos</button>
+    </div>
+
+    <!-- Blogs Tab -->
+    <div id="blogs" class="tab-content active" style="max-width:900px">
+      <h3 style="color:#00ffa7;margin-bottom:14px">Medium Articles</h3>
+      
+      <div class="blog-item">
+        <a href="https://medium.com/@mico01/computer-types-tryhackme-complete-walkthrough-0f9b9edab1b6?sharedUserId=mico01and" target="_blank">
+          <i class="fas fa-external-link-alt"></i> Computer Types — TryHackMe complete walkthrough
+        </a>
+        <div class="blog-desc">
+          A practical walkthrough covering different machine types on TryHackMe with step-by-step commands, key takeaways and remediation notes.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Videos Tab -->
+    <div id="videos" class="tab-content" style="max-width:1100px">
+      <h3 style="color:#00ffa7;margin-bottom:14px">YouTube Tutorials</h3>
+      <p style="color:#b8c2cc;font-size:0.9rem;margin-bottom:16px">Click any video to play (lazy-loaded for faster loading).</p>
+      
+      <div class="video-grid">
+        <!-- Video 1: Overview -->
+        <div class="video-wrap">
+          <div class="video-preview" data-video-id="9VJmx2wVegg" aria-label="Play video">
+            <img src="https://img.youtube.com/vi/9VJmx2wVegg/hqdefault.jpg" alt="Featured video 1 thumbnail">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <div class="video-caption">Overview: concise introduction and context for the topic.</div>
+        </div>
+
+        <!-- Video 2: Walkthrough -->
+        <div class="video-wrap">
+          <div class="video-preview" data-video-id="xWIjqD_Ssbw" aria-label="Play video">
+            <img src="https://img.youtube.com/vi/xWIjqD_Ssbw/hqdefault.jpg" alt="Featured video 2 thumbnail">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <div class="video-caption">Walkthrough: practical demo and hands-on steps.</div>
+        </div>
+
+        <!-- Video 3: Deep dive -->
+        <div class="video-wrap">
+          <div class="video-preview" data-video-id="dvvFyTkDVoU" aria-label="Play video">
+            <img src="https://img.youtube.com/vi/dvvFyTkDVoU/hqdefault.jpg" alt="Featured video 3 thumbnail">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <div class="video-caption">Deep dive: technical explanation and finer details.</div>
+        </div>
+
+        <!-- Video 4: Demo -->
+        <div class="video-wrap">
+          <div class="video-preview" data-video-id="pasaLQviRlY" aria-label="Play video">
+            <img src="https://img.youtube.com/vi/pasaLQviRlY/hqdefault.jpg" alt="Featured video 4 thumbnail">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <div class="video-caption">Demo: step-through examples and commands.</div>
+        </div>
+
+        <!-- Video 5: Bonus -->
+        <div class="video-wrap">
+          <div class="video-preview" data-video-id="4UwHzY8vOQM" aria-label="Play video">
+            <img src="https://img.youtube.com/vi/4UwHzY8vOQM/hqdefault.jpg" alt="Featured video 5 thumbnail">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <div class="video-caption">Bonus: related tips and follow-up resources.</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', function(){
+        const tabName = this.getAttribute('data-tab');
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        // Show selected tab
+        document.getElementById(tabName).classList.add('active');
+        this.classList.add('active');
+      });
+    });
+
+    // Lazy-load videos on click
+    document.addEventListener('click', function(e){
+      const prev = e.target.closest('.video-preview');
+      if(!prev) return;
+      const id = prev.getAttribute('data-video-id');
+      if(!id) return;
+      const wrap = prev.parentElement;
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('width','100%');
+      iframe.setAttribute('height','100%');
+      iframe.setAttribute('frameborder','0');
+      iframe.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen','');
+      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      wrap.insertBefore(iframe, prev.nextSibling);
+      prev.style.display = 'none';
+    });
+
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    if(hamburger){
+      hamburger.addEventListener('click', function(){
+        navMenu.classList.toggle('nav-open');
+      });
+    }
+  </script>
+  <script src="assets/js/nav-toggle.js"></script>
+</body>
+</html>
