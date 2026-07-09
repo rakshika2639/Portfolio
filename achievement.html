@@ -42,6 +42,10 @@
 
     .achievement-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 10px 25px rgba(0,0,0,.35);display:flex;justify-content:center;align-items:center}
     .achievement-card iframe{max-width:100%;border-radius:8px}
+    .embed-wrap{width:100%;display:flex;justify-content:center}
+    .ln-fallback{display:none;align-items:center;justify-content:center;padding:40px;border-radius:10px;width:100%;max-width:720px;background:linear-gradient(135deg,rgba(13,17,23,.65),rgba(22,27,34,.68));border:1px solid rgba(88,166,255,.06)}
+    .fallback-link{display:inline-flex;align-items:center;gap:12px;padding:14px 20px;background:linear-gradient(90deg,var(--brand),var(--accent));color:#071022;border-radius:10px;font-weight:800;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.45);font-size:1rem}
+    .fallback-link i{font-size:1.35rem}
 
     @media(max-width:1100px){.main{padding:24px}}
     @media(max-width:992px){.sidebar{width:90px}.main{margin-left:90px}.nav-menu a span{display:none}}
@@ -78,11 +82,67 @@
       <p class="achievement-desc">Highlights and milestones from my professional journey.</p>
 
       <div class="achievement-card">
-        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7473993251570622464?collapsed=1" height="669" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+        <div class="embed-wrap">
+          <iframe id="ln-embed" src="https://www.linkedin.com/embed/feed/update/urn:li:share:7473993251570622464?collapsed=1" title="Embedded post" loading="lazy" style="width:100%;height:669px;border:0;border-radius:8px;" ></iframe>
+
+          <div id="ln-fallback" class="ln-fallback" style="display:none;">
+            <a href="https://www.linkedin.com/feed/update/urn:li:share:7473993251570622464" target="_blank" rel="noopener noreferrer" class="fallback-link">
+              <i class="fab fa-linkedin"></i>
+              View this achievement on LinkedIn
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 
   <script src="assets/js/nav-toggle.js"></script>
-</body>
-</html>
+  <script>
+    (function(){
+      const iframe = document.getElementById('ln-embed');
+      const fallback = document.getElementById('ln-fallback');
+      let loaded = false;
+
+      // If iframe load isn't usable due to CORS or LinkedIn blocking, show a clear fallback
+      iframe.addEventListener('load', () => {
+        try {
+          const doc = iframe.contentDocument || iframe.contentWindow.document;
+          if (doc && doc.body && doc.body.childNodes.length > 0) {
+            loaded = true;
+            fallback.style.display = 'none';
+            iframe.style.display = 'block';
+            return;
+          }
+        } catch (e) {
+          // cross-origin access will throw — assume embed attempted, wait briefly then show fallback if still blank
+          setTimeout(() => {
+            try {
+              const doc = iframe.contentDocument || iframe.contentWindow.document;
+              if (!doc || !doc.body || doc.body.childNodes.length === 0) {
+                iframe.style.display = 'none';
+                fallback.style.display = 'flex';
+              }
+            } catch (e) {
+              iframe.style.display = 'none';
+              fallback.style.display = 'flex';
+            }
+          }, 800);
+        }
+        // If DOM present but empty, show fallback after short delay
+        setTimeout(() => {
+          if (!loaded) {
+            iframe.style.display = 'none';
+            fallback.style.display = 'flex';
+          }
+        }, 1200);
+      });
+
+      // Safety net: if nothing happens within 2s, show fallback
+      setTimeout(() => {
+        if (!loaded) {
+          iframe.style.display = 'none';
+          fallback.style.display = 'flex';
+        }
+      }, 2000);
+    })();
+  </script>
