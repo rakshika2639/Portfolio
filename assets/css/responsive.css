@@ -7,6 +7,22 @@ img, picture, video, svg { max-width:100%; height:auto; display:block; }
 *{box-sizing:border-box}
 body{min-width:320px}
 
+/* Social/icon sizing and hover micro-interactions */
+.social-icons a, .contacts a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:8px; background:transparent; color:inherit; text-decoration:none; transition:transform .18s ease, box-shadow .18s ease, color .18s ease; border:1px solid transparent }
+.social-icons a i, .contacts a i { font-size:1.05rem; line-height:1 }
+.social-icons a:hover, .contacts a:hover { transform:translateY(-4px) scale(1.05); box-shadow:0 8px 24px rgba(88,166,255,.12); color:var(--brand); border-color:rgba(88,166,255,.12) }
+
+/* Video preview (lazy iframe) */
+.video-wrap{background:#000;border-radius:8px;overflow:hidden;position:relative}
+.video-preview{position:relative;cursor:pointer;background:#000;display:block}
+.video-preview img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.78);transition:transform .25s ease}
+.video-preview:hover img{transform:scale(1.03)}
+.video-preview .play-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:999px;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;box-shadow:0 8px 20px rgba(0,0,0,.6)}
+.video-caption{padding:10px 12px;color:#bfcfda;font-size:0.95rem}
+
+/* Small adjustments for two-column video grid */
+@media(min-width:900px){.video-wrap{height:260px}.video-wrap iframe{height:100%}}
+
 /* Layout helpers used across pages */
 .main, .main-content, .dossier, .idcard { max-width:1200px; margin-left:auto; margin-right:auto }
 
