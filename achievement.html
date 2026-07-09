@@ -42,8 +42,9 @@
 
     .achievement-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 10px 25px rgba(0,0,0,.35);display:flex;justify-content:center;align-items:center}
     .achievement-card iframe{max-width:100%;border-radius:8px}
-    .embed-wrap{width:100%;display:flex;justify-content:center}
+    .embed-wrap{width:100%;display:flex;justify-content:center;overflow:auto;max-height:80vh}
     .ln-fallback{display:none;align-items:center;justify-content:center;padding:40px;border-radius:10px;width:100%;max-width:720px;background:linear-gradient(135deg,rgba(13,17,23,.65),rgba(22,27,34,.68));border:1px solid rgba(88,166,255,.06)}
+
     .fallback-link{display:inline-flex;align-items:center;gap:12px;padding:14px 20px;background:linear-gradient(90deg,var(--brand),var(--accent));color:#071022;border-radius:10px;font-weight:800;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.45);font-size:1rem}
     .fallback-link i{font-size:1.35rem}
 
@@ -81,16 +82,52 @@
       <h2 class="achievement-title"># Achievement</h2>
       <p class="achievement-desc">Highlights and milestones from my professional journey.</p>
 
-      <div class="achievement-card">
-        <div class="embed-wrap">
-          <iframe id="ln-embed" src="https://www.linkedin.com/embed/feed/update/urn:li:share:7473993251570622464?collapsed=1" title="Embedded post" loading="lazy" style="width:100%;height:669px;border:0;border-radius:8px;" ></iframe>
+    <div class="achievement-card">
+        <div class="embed-wrap" style="position:relative;">
+
+          <iframe
+            id="ln-embed"
+            src="https://www.linkedin.com/embed/feed/update/urn:li:share:7473993251570622464"
+            height="1362"
+            width="504"
+            frameborder="0"
+            allowfullscreen=""
+            title="Embedded achievement post"
+            loading="lazy"
+            style="width:100%;max-width:720px;border:0;border-radius:8px;"
+          ></iframe>
+
 
           <div id="ln-fallback" class="ln-fallback" style="display:none;">
-            <a href="https://www.linkedin.com/feed/update/urn:li:share:7473993251570622464" target="_blank" rel="noopener noreferrer" class="fallback-link">
-              <i class="fab fa-linkedin"></i>
-              View this achievement on LinkedIn
-            </a>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;">
+              <div style="width:100%;max-width:520px;display:flex;justify-content:center;">
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D5622AQHP5MmEUiBVmQ/feedshare-shrink_800/B56Z7j1QpbKkAc-/0/1781938850630?e=1785369600&v=beta&t=I1MA4fFVsyJ-0Ju6wRrxtFe4KGRXEbnPb1e9MSvqa5o"
+                  alt="Flipkart Gridlock Hackathon - Team Aarambh"
+                  style="width:180px;height:180px;border-radius:16px;object-fit:cover;border:1px solid rgba(88,166,255,.18);box-shadow:0 10px 25px rgba(0,0,0,.35);"
+                />
+
+              </div>
+              <a
+                href="https://www.linkedin.com/posts/rakshika-singh2639_flipkartgridlock-hackathon-teamaarambh-share-7473993251570622464-ioOt/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="fallback-link"
+              >
+                <i class="fab fa-linkedin"></i>
+                View the post on LinkedIn
+              </a>
+              <div style="margin:0;color:#b8c2cc;line-height:1.6;text-align:center;max-width:640px;">
+                <ul style="margin:0;padding-left:18px;text-align:left;display:inline-block;">
+                  <li>Shortlisted for Round 2 (Prototype Phase) — Flipkart Gridlock Hackathon 2.0</li>
+                  <li>Team Aarambh: Rakshika Singh &amp; Utsav Mishra</li>
+                  <li>Focus: rigorous iteration + verifiable performance</li>
+                </ul>
+                <div style="margin-top:10px;opacity:.95;">Open the full post via the LinkedIn link.</div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -98,51 +135,33 @@
 
   <script src="assets/js/nav-toggle.js"></script>
   <script>
-    (function(){
+    (function () {
       const iframe = document.getElementById('ln-embed');
       const fallback = document.getElementById('ln-fallback');
-      let loaded = false;
 
-      // If iframe load isn't usable due to CORS or LinkedIn blocking, show a clear fallback
+      // Start by hiding the iframe until we decide whether it's loaded.
+      iframe.style.display = 'none';
+
+      // Show iframe after load event; if it doesn't become visible by timeout, show fallback.
+      let shouldShowIframe = false;
+
       iframe.addEventListener('load', () => {
-        try {
-          const doc = iframe.contentDocument || iframe.contentWindow.document;
-          if (doc && doc.body && doc.body.childNodes.length > 0) {
-            loaded = true;
-            fallback.style.display = 'none';
-            iframe.style.display = 'block';
-            return;
-          }
-        } catch (e) {
-          // cross-origin access will throw — assume embed attempted, wait briefly then show fallback if still blank
-          setTimeout(() => {
-            try {
-              const doc = iframe.contentDocument || iframe.contentWindow.document;
-              if (!doc || !doc.body || doc.body.childNodes.length === 0) {
-                iframe.style.display = 'none';
-                fallback.style.display = 'flex';
-              }
-            } catch (e) {
-              iframe.style.display = 'none';
-              fallback.style.display = 'flex';
-            }
-          }, 800);
-        }
-        // If DOM present but empty, show fallback after short delay
+        shouldShowIframe = true;
+        // Give LinkedIn a moment to render its content inside the iframe.
         setTimeout(() => {
-          if (!loaded) {
-            iframe.style.display = 'none';
-            fallback.style.display = 'flex';
-          }
-        }, 1200);
+          if (!shouldShowIframe) return;
+          iframe.style.display = 'block';
+          fallback.style.display = 'none';
+        }, 600);
       });
 
-      // Safety net: if nothing happens within 2s, show fallback
+      // Safety net: if iframe never becomes usable, show fallback.
       setTimeout(() => {
-        if (!loaded) {
+        if (!shouldShowIframe) {
           iframe.style.display = 'none';
           fallback.style.display = 'flex';
         }
       }, 2000);
     })();
   </script>
+
